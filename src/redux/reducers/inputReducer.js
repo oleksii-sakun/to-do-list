@@ -14,8 +14,8 @@ export default function inputReducer(state = initialState, action) {
     case DELETE_TASK:
       return {
         ...state.tasksToDo,
-        tasksToDo: state.tasksToDo.delete(
-          state.tasksToDo.indexOf(action.payload)
+        tasksToDo: state.tasksToDo.filter(
+          (task) => task.id !== action.payload.id
         ),
       };
 

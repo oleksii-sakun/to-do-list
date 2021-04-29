@@ -12,7 +12,7 @@ export default function CustomInput(props) {
   }
 
   function handleButtonCreateTask(state) {
-    dispatch(addTask(input));
+    dispatch(addTask(input, Date.now()));
   }
 
   return (
