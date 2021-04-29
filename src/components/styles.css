@@ -53,5 +53,5 @@
 .checklist_task-remove:after {
   display: inline-block;
   color: #d66;
-  content: "+";
+  content: "X";
 }
