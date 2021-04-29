@@ -22,7 +22,7 @@ export default function CustomInput(props) {
         onChange={handleInputChange}
         placeholder="write a task"
       ></input>
-      <button className="btn" onClick={handleButtonCreateTask}>
+      <button className="add_task_btn" onClick={handleButtonCreateTask}>
         Add
       </button>
     </div>

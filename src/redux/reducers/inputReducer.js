@@ -1,4 +1,4 @@
-import { CREATE_TASK } from "../constants";
+import { CREATE_TASK, DELETE_TASK } from "../constants";
 
 const initialState = {
   tasksToDo: [],
@@ -10,6 +10,13 @@ export default function inputReducer(state = initialState, action) {
       return {
         ...state.tasksToDo,
         tasksToDo: state.tasksToDo.concat([action.payload]),
+      };
+    case DELETE_TASK:
+      return {
+        ...state.tasksToDo,
+        tasksToDo: state.tasksToDo.delete(
+          state.tasksToDo.indexOf(action.payload)
+        ),
       };
 
     default:

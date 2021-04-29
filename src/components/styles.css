@@ -1,8 +1,8 @@
 .board {
   display: flex;
   justify-content: space-around;
-  width: 1000px;
-  height: 550px;
+  width: auto;
+  min-height: 550px;
   border: 5px solid green;
   padding: 10px;
   margin: 30px;
@@ -11,7 +11,7 @@
 
 .list_item {
   width: 300px;
-  height: 500px;
+  min-height: 500px;
   border: 2px solid blue;
   padding: 10px;
   border-radius: 4px;
@@ -38,7 +38,7 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.19);
 }
 
-.btn {
+.add_task_btn {
   width: 75px;
   height: 30px;
   border-radius: 4px;
@@ -46,11 +46,11 @@
   border: 0;
 }
 
-.btn:hover {
+.add_task_btn:hover {
   transform: scale(1.2);
 }
 
-.checklist_task--remove:after {
+.checklist_task-remove:after {
   display: inline-block;
   color: #d66;
   content: "+";
