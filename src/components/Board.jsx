@@ -8,6 +8,9 @@ import { deleteTask, moveTaskToInProgress } from "../redux/actions/inputAction";
 
 export default function Board(props) {
   const tasksToDo = useSelector(({ input: { tasksToDo } }) => tasksToDo);
+  const tasksInProgress = useSelector(
+    ({ input: { tasksInProgress } }) => tasksInProgress
+  );
   const dispatch = useDispatch();
 
   const handleDeleteTask = (task) => {
@@ -32,13 +35,30 @@ export default function Board(props) {
     });
   }
 
+  function renderTasksInProgressList() {
+    return tasksInProgress.map((item) => {
+      if (item.task) {
+        return (
+          <Card
+            handleMoveTaskToInProgress={() => handleMoveTaskToInProgress(item)}
+            handleDeleteTask={() => handleDeleteTask(item)}
+            key={item.id}
+            task={item.task}
+          ></Card>
+        );
+      }
+    });
+  }
+
   return (
     <div className="board">
       <List className="to_do" title="To do">
         {renderTasksInList()}
         <CustomInput />
       </List>
-      <List className="in_process" title="In progress"></List>
+      <List className="in_process" title="In progress">
+        {renderTasksInProgressList()}
+      </List>
       <List className="done" title="Done"></List>
     </div>
   );
