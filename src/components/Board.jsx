@@ -20,7 +20,7 @@ export default function Board(props) {
     <div className="board">
       <List className="to_do" title="To do">
         {renderTasksInList()}
-        <CustomInput></CustomInput>
+        <CustomInput />
       </List>
       <List className="in_process" title="In process"></List>
       <List className="done" title="Done"></List>
