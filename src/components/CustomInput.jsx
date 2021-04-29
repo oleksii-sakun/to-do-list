@@ -4,7 +4,7 @@ import { addTask } from "../redux/actions/inputAction";
 
 export default function CustomInput(props) {
   const [input, setInput] = useState("");
-
+  const id = Date.now();
   const dispatch = useDispatch();
 
   function handleInputChange(event) {
@@ -12,7 +12,7 @@ export default function CustomInput(props) {
   }
 
   function handleButtonCreateTask(state) {
-    dispatch(addTask(input, Date.now()));
+    dispatch(addTask(input, id));
   }
 
   return (

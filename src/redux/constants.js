@@ -1,2 +1,3 @@
 export const CREATE_TASK = "CREATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
+export const MOVE_TASK_TO_IN_PROGRESS = "MOVE_TASK_TO_IN_PROGRESS";
