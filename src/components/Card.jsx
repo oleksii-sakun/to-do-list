@@ -3,10 +3,9 @@ import React from "react";
 export default function Card(props) {
   return (
     <div className="card">
+      <input type="checkbox" />
       {props.task}
-      {/* <div className="card_title"></div> */}
-      {/* <div className="card_description">test</div>
-      <div className="tasks">test</div> */}
+      <a href="#" className="checklist_task-remove" />
     </div>
   );
 }
