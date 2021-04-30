@@ -20,59 +20,55 @@ export default function inputReducer(state = initialState, action) {
     case CREATE_TASK:
       return {
         ...state,
-        tasksToDo: state.tasksToDo.concat([action.payload]),
+        tasksToDo: addTaskToList(state.tasksToDo, action.payload),
       };
     case DELETE_TASK:
       return {
         ...state,
-        tasksToDo: state.tasksToDo.filter(
-          (task) => task.id !== action.payload.id
-        ),
+        tasksToDo: filterList(state.tasksToDo, action.payload.id),
       };
     case MOVE_TASK_TO_IN_PROGRESS:
       return {
         ...state,
-        tasksToDo: state.tasksToDo.filter(
-          (task) => task.id !== action.payload.id
-        ),
-        tasksInProgress: state.tasksInProgress.concat([action.payload]),
+        tasksToDo: filterList(state.tasksToDo, action.payload.id),
+        tasksInProgress: addTaskToList(state.tasksInProgress, action.payload),
       };
 
     case MOVE_TASK_IN_TO_DO:
       return {
         ...state,
-        tasksInProgress: state.tasksInProgress.filter(
-          (task) => task.id !== action.payload.id
-        ),
-        tasksToDo: state.tasksToDo.concat([action.payload]),
+        tasksInProgress: filterList(state.tasksInProgress, action.payload.id),
+        tasksToDo: addTaskToList(state.tasksToDo, action.payload),
       };
 
     case MOVE_TASK_TO_DONE:
       return {
         ...state,
-        tasksInProgress: state.tasksInProgress.filter(
-          (task) => task.id !== action.payload.id
-        ),
-        tasksDone: state.tasksDone.concat([action.payload]),
+        tasksInProgress: filterList(state.tasksInProgress, action.payload.id),
+        tasksDone: addTaskToList(state.tasksDone, action.payload),
       };
 
     case MOVE_TASK_TO_IN_PROGRESS_FROM_DONE:
       return {
         ...state,
-        tasksDone: state.tasksDone.filter(
-          (task) => task.id !== action.payload.id
-        ),
-        tasksInProgress: state.tasksInProgress.concat([action.payload]),
+        tasksDone: filterList(state.tasksDone, action.payload.id),
+        tasksInProgress: addTaskToList(state.tasksInProgress, action.payload),
       };
 
     case DELETE_TASK_FROM_DONE:
       return {
         ...state,
-        tasksDone: state.tasksDone.filter(
-          (task) => task.id !== action.payload.id
-        ),
+        tasksDone: filterList(state.tasksDone, action.payload.id),
       };
     default:
       return state;
   }
+}
+
+function filterList(list, taskId) {
+  return list.filter((task) => task.id !== taskId);
+}
+
+function addTaskToList(list, task) {
+  return list.concat([task]);
 }

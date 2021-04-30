@@ -1,6 +1,4 @@
 import React from "react";
-import Card from "./Card";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function List(props) {
   return (
