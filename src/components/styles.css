@@ -9,8 +9,13 @@
   border-radius: 8px;
 }
 
+.board_title {
+  display: flex;
+  justify-content: center;
+}
+
 .list_item {
-  width: 300px;
+  width: auto;
   min-height: 500px;
   border: 2px solid blue;
   padding: 10px;
@@ -50,8 +55,23 @@
   transform: scale(1.2);
 }
 
-.checklist_task-remove:after {
-  display: inline-block;
-  color: #d66;
-  content: "X";
+.right_card_button {
+  border-radius: 25%;
+  background: rgb(231, 107, 36);
+  border: 0;
+  float: right;
+}
+
+.right_card_button:hover {
+  transform: scale(1.05);
+}
+
+.left_card_button {
+  border-radius: 25%;
+  background: rgb(190, 209, 190);
+  border: 0;
+}
+
+.left_card_button:hover {
+  transform: scale(1.05);
 }
