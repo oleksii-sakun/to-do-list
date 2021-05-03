@@ -10,12 +10,7 @@ export default function Card(props) {
         {props.textForTheLeftButton}
       </button>
       {props.task}
-      <button
-        onClick={props.handleActionForRightButton}
-        className="right_card_button"
-      >
-        {props.textForTheRightButton}
-      </button>
+      {props.buttons}
     </div>
   );
 }

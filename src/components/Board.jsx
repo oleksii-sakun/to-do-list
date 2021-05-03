@@ -4,108 +4,60 @@ import List from "./List";
 import Card from "./Card";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTask,
-  moveTaskInToDo,
-  moveTaskToInProgress,
-  moveTaskToDone,
-  moveTaskToInProgressFromDone,
-  deleteTaskFromDone,
-} from "../redux/actions/inputAction";
+import { setAppDataAction } from "../redux/actions/inputAction";
+import getData, { changeTaskColumnIdRequest } from "../api";
+import { deleteTaskRequest } from "../api";
 
 export default function Board(props) {
-  const tasksToDo = useSelector(({ input: { tasksToDo } }) => tasksToDo);
-  const tasksInProgress = useSelector(
-    ({ input: { tasksInProgress } }) => tasksInProgress
-  );
-  const tasksDone = useSelector(({ input: { tasksDone } }) => tasksDone);
-
   const dispatch = useDispatch();
 
-  const handleDeleteTask = (task) => {
-    dispatch(deleteTask(task));
-  };
-  const handleMoveTaskToInProgress = (task) => {
-    dispatch(moveTaskToInProgress(task));
-  };
-
-  const handleMoveTaskInToDo = (task) => {
-    dispatch(moveTaskInToDo(task));
-  };
-
-  const handleMoveTaskToDone = (task) => {
-    dispatch(moveTaskToDone(task));
-  };
-
-  const handleMoveTaskToInProgressFromDone = (task) => {
-    dispatch(moveTaskToInProgressFromDone(task));
-  };
-
-  const handleDeleteTaskFromDone = (task) => {
-    dispatch(deleteTaskFromDone(task));
-  };
-
-  function renderTasksInList() {
-    return tasksToDo.map((item) => {
-      if (item.task) {
-        return (
-          <Card
-            handleActionForLeftButtton={() => handleMoveTaskToInProgress(item)}
-            handleActionForRightButton={() => handleDeleteTask(item)}
-            key={item.id}
-            task={item.task}
-            textForTheLeftButton="in progress"
-            textForTheRightButton="X"
-          ></Card>
-        );
-      }
+  const getAppData = () => {
+    getData().then((data) => {
+      dispatch(setAppDataAction(data));
     });
-  }
+  };
 
-  function renderTasksInProgressList() {
-    return tasksInProgress.map((item) => {
-      return (
-        <Card
-          handleActionForLeftButtton={() => handleMoveTaskInToDo(item)}
-          handleActionForRightButton={() => handleMoveTaskToDone(item)}
-          key={item.id}
-          task={item.task}
-          textForTheLeftButton="to do"
-          textForTheRightButton="done"
-        ></Card>
-      );
-    });
-  }
+  React.useEffect(getAppData, []);
 
-  function renderTasksInDoneList() {
-    return tasksDone.map((item) => {
-      return (
-        <Card
-          handleActionForLeftButtton={() =>
-            handleMoveTaskToInProgressFromDone(item)
+  const appData = useSelector(({ app }) => app);
+
+  const getMoveButtonsForTask = (taskId) => () => (
+    <div>
+      {appData.map((column) => (
+        <button
+          key={column.id}
+          onClick={() =>
+            changeTaskColumnIdRequest(taskId, column.id).then(getAppData)
           }
-          handleActionForRightButton={() => handleDeleteTaskFromDone(item)}
-          key={item.id}
-          task={item.task}
-          textForTheLeftButton="in progress"
-          textForTheRightButton="X"
-        ></Card>
-      );
-    });
-  }
+        >
+          {column.title}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="board">
-      <List className="to_do" title="To do">
-        {renderTasksInList()}
-        <CustomInput />
-      </List>
-      <List className="in_process" title="In progress">
-        {renderTasksInProgressList()}
-      </List>
-      <List className="done" title="Done">
-        {renderTasksInDoneList()}
-      </List>
+      {appData.map((column) => (
+        <List key={column.id} className="column" title={column.title}>
+          {column.tasks.map((task) => {
+            const MoveButton = getMoveButtonsForTask(task.id);
+            return (
+              <Card
+                handleActionForLeftButtton={() => {
+                  deleteTaskRequest(task.id).then(getAppData);
+                }}
+                buttons={<MoveButton />}
+                key={task.id}
+                task={task.title}
+                textForTheLeftButton="X"
+                textForTheRightButton="Move to"
+              />
+            );
+          })}
+          <CustomInput column={column.id} getDataFunction={getAppData} />
+        </List>
+      ))}
     </div>
   );
 }

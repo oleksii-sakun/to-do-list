@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../redux/actions/inputAction";
+import { createTaskRequest } from "../api";
 
 export default function CustomInput(props) {
-  const [input, setInput] = useState("");
-  const id = Date.now();
-  const dispatch = useDispatch();
+  const [inputValue, setInput] = useState("");
 
   function handleInputChange(event) {
     setInput(event.target.value);
   }
 
-  function handleButtonCreateTask(state) {
-    dispatch(addTask(input, id));
-  }
+  const handleActionForAddTaskButton = (value, column) => {
+    if (value) {
+      createTaskRequest(value, column).then(props.getDataFunction);
+    }
+  };
 
   return (
     <div>
@@ -22,7 +21,12 @@ export default function CustomInput(props) {
         onChange={handleInputChange}
         placeholder="write a task"
       ></input>
-      <button className="add_task_btn" onClick={handleButtonCreateTask}>
+      <button
+        className="add_task_btn"
+        onClick={() =>
+          handleActionForAddTaskButton(inputValue, Number(props.column))
+        }
+      >
         Add
       </button>
     </div>
