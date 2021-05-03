@@ -84,3 +84,7 @@
   transform: scale(1.05);
   background: green;
 }
+
+.delete_column_btn {
+  background-color: rgb(221, 107, 72);
+}

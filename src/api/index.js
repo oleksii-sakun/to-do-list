@@ -38,3 +38,21 @@ export async function createTaskRequest(title, columnId) {
     }),
   });
 }
+
+export async function createColumnRequest(title) {
+  await fetch(`${baseUrl}/columns/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: title,
+    }),
+  });
+}
+
+export async function deleteColumnRequest(id) {
+  await fetch(`${baseUrl}/columns/${id}`, {
+    method: "DELETE",
+  });
+}
