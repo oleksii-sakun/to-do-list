@@ -3,7 +3,7 @@ import { Button, Input } from "semantic-ui-react";
 import { createTaskRequest } from "../api";
 import "semantic-ui-css/semantic.min.css";
 
-export default function CustomInput(props) {
+export default function CreateTaskInput(props) {
   const [inputValue, setInput] = useState("");
 
   function handleInputChange(event) {
@@ -28,9 +28,7 @@ export default function CustomInput(props) {
       <Button
         positive
         className="add_task_btn"
-        onClick={() =>
-          handleActionForAddTaskButton(inputValue, Number(props.column))
-        }
+        onClick={() => handleActionForAddTaskButton(inputValue, props.column)}
       >
         Add task
       </Button>
