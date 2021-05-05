@@ -1,5 +1,5 @@
 import React from "react";
-import CustomInput from "./CustomInput";
+import CreateTaskInput from "./CreateTaskInput";
 import List from "./List";
 import CustomCard from "./CustomCard";
 import "./styles.css";
@@ -59,7 +59,7 @@ export default function Board(props) {
     );
   };
 
-  const deleteColumnButton = (columnId) => () => (
+  const getDeleteColumnButton = (columnId) => () => (
     <div>
       <Button
         size="mini"
@@ -75,7 +75,7 @@ export default function Board(props) {
   return (
     <div className="board">
       {appData.map((column) => {
-        const DeleteColumnButton = deleteColumnButton(column.id);
+        const DeleteColumnButton = getDeleteColumnButton(column.id);
         return (
           <List
             key={column.id}
@@ -96,7 +96,7 @@ export default function Board(props) {
                 />
               );
             })}
-            <CustomInput column={column.id} getDataFunction={getAppData} />
+            <CreateTaskInput column={column.id} getDataFunction={getAppData} />
           </List>
         );
       })}
