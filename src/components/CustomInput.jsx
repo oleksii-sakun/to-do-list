@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Button, Input } from "semantic-ui-react";
 import { createTaskRequest } from "../api";
+import "semantic-ui-css/semantic.min.css";
 
 export default function CustomInput(props) {
   const [inputValue, setInput] = useState("");
@@ -11,24 +13,27 @@ export default function CustomInput(props) {
   const handleActionForAddTaskButton = (value, column) => {
     if (value) {
       createTaskRequest(value, column).then(props.getDataFunction);
+      setInput("");
     }
   };
 
   return (
     <div>
-      <input
-        className="input"
+      <Input
+        className="add_task_input"
         onChange={handleInputChange}
         placeholder="write a task"
-      ></input>
-      <button
+        value={inputValue}
+      ></Input>
+      <Button
+        positive
         className="add_task_btn"
         onClick={() =>
           handleActionForAddTaskButton(inputValue, Number(props.column))
         }
       >
-        Add
-      </button>
+        Add task
+      </Button>
     </div>
   );
 }

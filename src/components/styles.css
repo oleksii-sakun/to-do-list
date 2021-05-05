@@ -2,89 +2,70 @@
   display: flex;
   justify-content: space-around;
   min-height: 550px;
-  border: 5px solid rgb(65, 114, 146);
   padding: 10px;
-  border-radius: 15px;
-  width: 100%;
+  border-radius: 8px;
+  min-width: 100%;
   box-sizing: border-box;
-  background-image: url(../images/1.jpg);
-  background-size: cover;
+  background-color: #ccd6c9;
 }
 
 .board_title {
   display: flex;
   justify-content: center;
   font-size: 20px;
+  color: #2c3e5d;
 }
 
 .list_item {
-  flex-basis: 25%;
+  min-width: 320px;
   min-height: 500px;
-  border: 2px solid rgb(236, 223, 36);
-  padding: 10px;
+  padding: 10px 15px 10px 15px;
   border-radius: 4px;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.9);
+  background-color: #ebecf0;
+  margin: 0 5px;
 }
 .list_item h1 {
-  color: rgb(6, 20, 14);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-style: italic;
-  border-bottom: 2px solid black;
-}
-
-.card {
-  width: 250px;
-  height: auto;
-  border: 2px solid rgb(207, 191, 199);
-  margin: 5px;
-  padding: 3px;
-}
-
-.input {
-  margin: 30px 15px 0 0;
-  padding: 10px;
-  border-radius: 10px;
-  border: 0;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
-}
-
-.add_task_btn {
-  width: 75px;
-  height: 30px;
-  border-radius: 4px;
-  background: rgb(68, 177, 68);
-  border: 0;
-}
-
-.add_task_btn:hover {
-  transform: scale(1.2);
-}
-
-.right_card_button {
-  border-radius: 25%;
-  background: rgb(231, 107, 36);
-  border: 0;
-  float: right;
-}
-
-.right_card_button:hover {
-  transform: scale(1.05);
-  background: red;
-}
-
-.left_card_button {
-  border-radius: 25%;
-  background: rgb(190, 209, 190);
-  border: 0;
-  margin-right: 5px;
-}
-
-.left_card_button:hover {
-  transform: scale(1.05);
-  background: green;
+  color: #2c3e5d;
+  font-size: 22px;
 }
 
 .delete_column_btn {
-  background-color: rgb(221, 107, 72);
+  float: right;
+  padding: 3px;
+}
+
+.move_buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 0 14px 0;
+}
+
+.content {
+  overflow-wrap: break-word;
+}
+
+.ui.negative.button {
+  padding: 5px 6px;
+  margin: 0;
+  text-align: center;
+}
+
+.ui.tiny {
+  padding: 0;
+  margin-right: 15px;
+  background-color: white;
+  width: 9px;
+}
+
+.ui.mini {
+  margin: 0;
+}
+
+.trash.icon {
+  margin: 0;
+  padding: 0;
+}
+
+.positive.add_task_btn {
+  margin: 0 0 0 9px;
 }

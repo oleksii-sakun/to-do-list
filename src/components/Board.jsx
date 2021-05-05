@@ -1,7 +1,7 @@
 import React from "react";
 import CustomInput from "./CustomInput";
 import List from "./List";
-import Card from "./Card";
+import CustomCard from "./CustomCard";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setAppDataAction } from "../redux/actions/inputAction";
@@ -11,7 +11,8 @@ import getData, {
   deleteColumnRequest,
 } from "../api";
 import { deleteTaskRequest } from "../api";
-import { Button } from "semantic-ui-react";
+import { Button, Input } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 export default function Board(props) {
   const dispatch = useDispatch();
@@ -27,9 +28,10 @@ export default function Board(props) {
   const appData = useSelector(({ app }) => app);
 
   const getMoveButtonsForTask = (taskId) => () => (
-    <div>
+    <div className="move_buttons">
       {appData.map((column) => (
         <Button
+          size="mini"
           key={column.id}
           onClick={() =>
             changeTaskColumnIdRequest(taskId, column.id).then(getAppData)
@@ -41,27 +43,31 @@ export default function Board(props) {
     </div>
   );
 
-  const addColumnButton = (newColumnTitle) => () => {
+  const AddColumnButton = () => {
     return (
       <div>
-        <Button
-          onClick={() => createColumnRequest(newColumnTitle).then(getAppData)}
-        >
-          +Add column
-        </Button>
+        <Input
+          size="mini"
+          placeholder="new column name"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              createColumnRequest(event.target.value).then(getAppData);
+            }
+          }}
+        ></Input>
       </div>
     );
   };
 
-  const AddColumnButton = addColumnButton("test col");
-
   const deleteColumnButton = (columnId) => () => (
     <div>
       <Button
+        size="mini"
+        negative
         className="delete_column_btn"
         onClick={() => deleteColumnRequest(columnId).then(getAppData)}
       >
-        Delete column
+        X
       </Button>
     </div>
   );
@@ -80,15 +86,13 @@ export default function Board(props) {
             {column.tasks.map((task) => {
               const MoveButton = getMoveButtonsForTask(task.id);
               return (
-                <Card
-                  handleActionForLeftButtton={() => {
+                <CustomCard
+                  handleActionForDeleteTaskButtton={() => {
                     deleteTaskRequest(task.id).then(getAppData);
                   }}
                   buttons={<MoveButton />}
                   key={task.id}
                   task={task.title}
-                  textForTheLeftButton="X"
-                  textForTheRightButton="Move to"
                 />
               );
             })}
@@ -96,7 +100,7 @@ export default function Board(props) {
           </List>
         );
       })}
-      {<AddColumnButton className="delete_column_btn" />}
+      {<AddColumnButton />}
     </div>
   );
 }

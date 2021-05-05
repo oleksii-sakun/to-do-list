@@ -1,40 +1,34 @@
 {
   "tasks": [
     {
-      "title": "Check homework",
-      "description": "",
-      "columnId": 1,
-      "id": 2
-    },
-    {
       "title": "col1",
       "description": "",
       "columnId": "1",
       "id": 3
     },
     {
-      "title": "уамуамуам",
-      "description": "",
-      "columnId": 2,
-      "id": 5
-    },
-    {
-      "title": "уамуамуам",
-      "description": "",
-      "columnId": 3,
-      "id": 6
-    },
-    {
-      "title": "умкамам",
-      "description": "",
-      "columnId": 3,
-      "id": 7
-    },
-    {
-      "title": "ввввввввав вс ",
+      "title": "кнопки удаления должны быть разными и меньше",
       "description": "",
       "columnId": 1,
-      "id": 8
+      "id": 26
+    },
+    {
+      "title": "tttt",
+      "description": "",
+      "columnId": 3,
+      "id": 27
+    },
+    {
+      "title": "123123123123",
+      "description": "",
+      "columnId": 2,
+      "id": 28
+    },
+    {
+      "title": "wergergsegb",
+      "description": "",
+      "columnId": 3,
+      "id": 29
     }
   ],
   "columns": [
