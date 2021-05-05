@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "title": "col1",
+      "description": "",
+      "columnId": "1",
+      "id": 3
+    },
+    {
+      "title": "кнопки удаления должны быть разными и меньше",
+      "description": "",
+      "columnId": 1,
+      "id": 26
+    },
+    {
+      "title": "tttt",
+      "description": "",
+      "columnId": 3,
+      "id": 27
+    },
+    {
+      "title": "123123123123",
+      "description": "",
+      "columnId": 2,
+      "id": 28
+    },
+    {
+      "title": "wergergsegb",
+      "description": "",
+      "columnId": 3,
+      "id": 29
+    }
+  ],
+  "columns": [
+    {
+      "id": 1,
+      "title": "To Do"
+    },
+    {
+      "id": 2,
+      "title": "In Progress"
+    },
+    {
+      "id": 3,
+      "title": "Done"
+    }
+  ]
+}

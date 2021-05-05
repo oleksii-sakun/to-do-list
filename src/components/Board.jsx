@@ -1,111 +1,106 @@
 import React from "react";
 import CustomInput from "./CustomInput";
 import List from "./List";
-import Card from "./Card";
+import CustomCard from "./CustomCard";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTask,
-  moveTaskInToDo,
-  moveTaskToInProgress,
-  moveTaskToDone,
-  moveTaskToInProgressFromDone,
-  deleteTaskFromDone,
-} from "../redux/actions/inputAction";
+import { setAppDataAction } from "../redux/actions/inputAction";
+import getData, {
+  changeTaskColumnIdRequest,
+  createColumnRequest,
+  deleteColumnRequest,
+} from "../api";
+import { deleteTaskRequest } from "../api";
+import { Button, Input } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 export default function Board(props) {
-  const tasksToDo = useSelector(({ input: { tasksToDo } }) => tasksToDo);
-  const tasksInProgress = useSelector(
-    ({ input: { tasksInProgress } }) => tasksInProgress
-  );
-  const tasksDone = useSelector(({ input: { tasksDone } }) => tasksDone);
-
   const dispatch = useDispatch();
 
-  const handleDeleteTask = (task) => {
-    dispatch(deleteTask(task));
-  };
-  const handleMoveTaskToInProgress = (task) => {
-    dispatch(moveTaskToInProgress(task));
-  };
-
-  const handleMoveTaskInToDo = (task) => {
-    dispatch(moveTaskInToDo(task));
-  };
-
-  const handleMoveTaskToDone = (task) => {
-    dispatch(moveTaskToDone(task));
-  };
-
-  const handleMoveTaskToInProgressFromDone = (task) => {
-    dispatch(moveTaskToInProgressFromDone(task));
-  };
-
-  const handleDeleteTaskFromDone = (task) => {
-    dispatch(deleteTaskFromDone(task));
-  };
-
-  function renderTasksInList() {
-    return tasksToDo.map((item) => {
-      if (item.task) {
-        return (
-          <Card
-            handleActionForLeftButtton={() => handleMoveTaskToInProgress(item)}
-            handleActionForRightButton={() => handleDeleteTask(item)}
-            key={item.id}
-            task={item.task}
-            textForTheLeftButton="in progress"
-            textForTheRightButton="X"
-          ></Card>
-        );
-      }
+  const getAppData = () => {
+    getData().then((data) => {
+      dispatch(setAppDataAction(data));
     });
-  }
+  };
 
-  function renderTasksInProgressList() {
-    return tasksInProgress.map((item) => {
-      return (
-        <Card
-          handleActionForLeftButtton={() => handleMoveTaskInToDo(item)}
-          handleActionForRightButton={() => handleMoveTaskToDone(item)}
-          key={item.id}
-          task={item.task}
-          textForTheLeftButton="to do"
-          textForTheRightButton="done"
-        ></Card>
-      );
-    });
-  }
+  React.useEffect(getAppData, []);
 
-  function renderTasksInDoneList() {
-    return tasksDone.map((item) => {
-      return (
-        <Card
-          handleActionForLeftButtton={() =>
-            handleMoveTaskToInProgressFromDone(item)
+  const appData = useSelector(({ app }) => app);
+
+  const getMoveButtonsForTask = (taskId) => () => (
+    <div className="move_buttons">
+      {appData.map((column) => (
+        <Button
+          size="mini"
+          key={column.id}
+          onClick={() =>
+            changeTaskColumnIdRequest(taskId, column.id).then(getAppData)
           }
-          handleActionForRightButton={() => handleDeleteTaskFromDone(item)}
-          key={item.id}
-          task={item.task}
-          textForTheLeftButton="in progress"
-          textForTheRightButton="X"
-        ></Card>
-      );
-    });
-  }
+        >
+          {column.title}
+        </Button>
+      ))}
+    </div>
+  );
+
+  const AddColumnButton = () => {
+    return (
+      <div>
+        <Input
+          size="mini"
+          placeholder="new column name"
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              createColumnRequest(event.target.value).then(getAppData);
+            }
+          }}
+        ></Input>
+      </div>
+    );
+  };
+
+  const deleteColumnButton = (columnId) => () => (
+    <div>
+      <Button
+        size="mini"
+        negative
+        className="delete_column_btn"
+        onClick={() => deleteColumnRequest(columnId).then(getAppData)}
+      >
+        X
+      </Button>
+    </div>
+  );
 
   return (
     <div className="board">
-      <List className="to_do" title="To do">
-        {renderTasksInList()}
-        <CustomInput />
-      </List>
-      <List className="in_process" title="In progress">
-        {renderTasksInProgressList()}
-      </List>
-      <List className="done" title="Done">
-        {renderTasksInDoneList()}
-      </List>
+      {appData.map((column) => {
+        const DeleteColumnButton = deleteColumnButton(column.id);
+        return (
+          <List
+            key={column.id}
+            className="column"
+            deleteColumnButton={<DeleteColumnButton />}
+            title={column.title}
+          >
+            {column.tasks.map((task) => {
+              const MoveButton = getMoveButtonsForTask(task.id);
+              return (
+                <CustomCard
+                  handleActionForDeleteTaskButtton={() => {
+                    deleteTaskRequest(task.id).then(getAppData);
+                  }}
+                  buttons={<MoveButton />}
+                  key={task.id}
+                  task={task.title}
+                />
+              );
+            })}
+            <CustomInput column={column.id} getDataFunction={getAppData} />
+          </List>
+        );
+      })}
+      {<AddColumnButton />}
     </div>
   );
 }

@@ -1,0 +1,262 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ToDo api",
+		"_postman_id": "d1102348-9c41-522c-eb66-f14f6bba31e1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "task api",
+			"description": "",
+			"item": [
+				{
+					"name": "create task",
+					"request": {
+						"url": "http://localhost:3000/tasks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Check homework\",\n\t\"description\": \"\",\n\t\"columnId\": 2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"url": "http://localhost:3000/tasks/1",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"columnId\": 3\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete task",
+					"request": {
+						"url": "http://localhost:3000/tasks/2",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "search tasks",
+					"request": {
+						"url": {
+							"raw": "http://localhost:3000/tasks?q=car",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "car",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "column api",
+			"description": "",
+			"item": [
+				{
+					"name": "create column",
+					"request": {
+						"url": "http://localhost:3000/columns",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Archived\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update column",
+					"request": {
+						"url": {
+							"raw": "http://localhost:3000/columns/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"columns",
+								":1"
+							],
+							"query": [],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Some title\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete column",
+					"request": {
+						"url": "http://localhost:3000/columns/4",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "columns with tasks",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/columns?_embed=tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"columns"
+					],
+					"query": [
+						{
+							"key": "_embed",
+							"value": "tasks",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkM3NjREMkQxNkJFMUY4NDQ1RERGNjNEOUM2RkRGMTQyMUZGQjFFMEQiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJ4MlRTMFd2aC1FUmQzMlBaeHYzeFFoXzdIZzAifQ.eyJuYmYiOjE2MTk2MDYwMDQsImV4cCI6MTYxOTYxMzIwNCwiaXNzIjoiaHR0cHM6Ly9pZC5zZXJ2aWNlLnNwYWNlc2hpcC5jb20iLCJhdWQiOiJzcGFjZXNoaXAuY29tIiwiY2xpZW50X2lkIjoic3BhY2VzaGlwIiwic3ViIjoiamMzYnN0ajV0emR5YyIsImF1dGhfdGltZSI6MTYxOTYwNjAwNCwiaWRwIjoibG9jYWwiLCJzZXNzaW9uX2lkIjoiNzFkMDdjM2ZlYzI0NGUzM2E1OTkyOTAyZGE0MjJmZjciLCJsb2NhbGUiOiJlbi1VUyIsInNjb3BlIjpbImVtYWlsIiwib3BlbmlkIiwicHJvZmlsZSIsInNwYWNlc2hpcC5jb20iXSwiYW1yIjpbInB3ZCJdfQ.vwt7A3_7hjEPcFsZGvrFe1tdGWjvQfG0DgECh7N7tDIKfuqcFXbtujZObSW6wUFyBadv0keJfUcsGlKEy5nmelvG09PapvtlE8CXPE7rCuBPYqV_IYpz3lQQZJzt8n8kDMadGPq2uJIa5Uq-rIH8Y66YydvT8Ca5fP-ey6J_b0aEy2XJrZtnOezkrZFEyWC8qxeN1arA3yEN4ETxNr6qP-nyv1iiA3wfi2PudewcVqRRAscyO5s0JgMMk94l0BuUztYxvv3qGu9Z7YkCKo5witqykLip7hqmGjW_BrBxFuJqB_nMKq-CGw3SySOg3CNTfyO3J-n3bAWu8_aSh6Rluw",
+						"description": ""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty",
+						"description": ""
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors",
+						"description": ""
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin",
+						"description": ""
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache",
+						"description": ""
+					},
+					{
+						"key": "accept",
+						"value": "*/*",
+						"description": ""
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate, br",
+						"description": ""
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"PaymentMethodType\":\"BtcPay\",\"Currency\":\"USD\",\"Amount\":4}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
