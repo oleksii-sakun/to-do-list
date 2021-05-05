@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Input } from "semantic-ui-react";
-import { createTaskRequest } from "../api";
 import "semantic-ui-css/semantic.min.css";
 
 export default function CreateTaskInput(props) {
@@ -10,9 +9,9 @@ export default function CreateTaskInput(props) {
     setInput(event.target.value);
   }
 
-  const handleActionForAddTaskButton = (value, column) => {
-    if (value) {
-      createTaskRequest(value, column).then(props.getDataFunction);
+  const handleActionForAddTaskButton = () => {
+    if (inputValue) {
+      props.onAddTask(inputValue)
       setInput("");
     }
   };
@@ -28,7 +27,7 @@ export default function CreateTaskInput(props) {
       <Button
         positive
         className="add_task_btn"
-        onClick={() => handleActionForAddTaskButton(inputValue, props.column)}
+        onClick={handleActionForAddTaskButton}
       >
         Add task
       </Button>
