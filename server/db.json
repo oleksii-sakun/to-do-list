@@ -13,12 +13,6 @@
       "id": 26
     },
     {
-      "title": "tttt",
-      "description": "",
-      "columnId": 3,
-      "id": 27
-    },
-    {
       "title": "123123123123",
       "description": "",
       "columnId": 2,
@@ -29,6 +23,18 @@
       "description": "",
       "columnId": 3,
       "id": 29
+    },
+    {
+      "title": "fvdfvd",
+      "description": "",
+      "columnId": 1,
+      "id": 30
+    },
+    {
+      "title": "evevf",
+      "description": "",
+      "columnId": 2,
+      "id": 31
     }
   ],
   "columns": [

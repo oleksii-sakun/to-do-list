@@ -1,29 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CreateTaskInput from "./CreateTaskInput";
 import List from "./List";
 import CustomCard from "./CustomCard";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setAppDataAction } from "../redux/actions/inputAction";
-import getData, {
-  changeTaskColumnIdRequest,
-  createColumnRequest,
-  deleteColumnRequest,
-} from "../api";
-import { deleteTaskRequest } from "../api";
+import {
+  createColumnAction,
+  createTaskAction,
+  deleteColumnAction,
+  deleteTaskAction,
+  getAppDataAction,
+  updateTaskColumnIdAction,
+} from "../redux/actions/inputAction";
 import { Button, Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-export default function Board(props) {
+export default function Board() {
   const dispatch = useDispatch();
 
-  const getAppData = () => {
-    getData().then((data) => {
-      dispatch(setAppDataAction(data));
-    });
-  };
-
-  React.useEffect(getAppData, []);
+  useEffect(() => dispatch(getAppDataAction()), [dispatch]);
 
   const appData = useSelector(({ app }) => app);
 
@@ -33,9 +28,7 @@ export default function Board(props) {
         <Button
           size="mini"
           key={column.id}
-          onClick={() =>
-            changeTaskColumnIdRequest(taskId, column.id).then(getAppData)
-          }
+          onClick={() => dispatch(updateTaskColumnIdAction(taskId, column.id))}
         >
           {column.title}
         </Button>
@@ -51,7 +44,7 @@ export default function Board(props) {
           placeholder="new column name"
           onKeyPress={(event) => {
             if (event.key === "Enter") {
-              createColumnRequest(event.target.value).then(getAppData);
+              dispatch(createColumnAction(event.target.value));
             }
           }}
         ></Input>
@@ -65,7 +58,7 @@ export default function Board(props) {
         size="mini"
         negative
         className="delete_column_btn"
-        onClick={() => deleteColumnRequest(columnId).then(getAppData)}
+        onClick={() => dispatch(deleteColumnAction(columnId))}
       >
         X
       </Button>
@@ -88,7 +81,7 @@ export default function Board(props) {
               return (
                 <CustomCard
                   handleActionForDeleteTaskButtton={() => {
-                    deleteTaskRequest(task.id).then(getAppData);
+                    dispatch(deleteTaskAction(task.id));
                   }}
                   buttons={<MoveButton />}
                   key={task.id}
@@ -96,7 +89,12 @@ export default function Board(props) {
                 />
               );
             })}
-            <CreateTaskInput column={column.id} getDataFunction={getAppData} />
+            <CreateTaskInput
+              column={column.id}
+              onAddTask={(title) =>
+                dispatch(createTaskAction(title, column.id))
+              }
+            />
           </List>
         );
       })}
