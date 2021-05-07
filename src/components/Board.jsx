@@ -21,6 +21,7 @@ export default function Board() {
   useEffect(() => dispatch(getAppDataAction()), [dispatch]);
 
   const appData = useSelector(({ app }) => app);
+  // const errorData = useSelector(({ error }) => error);
 
   const getMoveButtonsForTask = (taskId) => () => (
     <div className="move_buttons">

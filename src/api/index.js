@@ -1,58 +1,34 @@
+import axios from "axios";
+import urljoin from "url-join";
+
 const baseUrl = "http://localhost:3000";
 
 export default async function getData() {
-  const apiData = await fetch(`${baseUrl}/columns?_embed=tasks`);
-  let taskData = await apiData.json();
+  const { data } = await axios.get(urljoin(baseUrl, "columns?_embed=tasks"));
 
-  return taskData;
+  return data;
 }
 
 export async function deleteTaskRequest(id) {
-  await fetch(`${baseUrl}/tasks/${id}`, {
-    method: "DELETE",
-  });
+  await axios.delete(urljoin(baseUrl, "tasks", id.toString()));
 }
 
 export async function changeTaskColumnIdRequest(taskId, columnId) {
-  await fetch(`${baseUrl}/tasks/${taskId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      columnId,
-    }),
-  });
+  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { columnId });
 }
 
 export async function createTaskRequest(title, columnId) {
-  await fetch(`${baseUrl}/tasks/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: title,
-      description: "",
-      columnId: columnId,
-    }),
+  await axios.post(urljoin(baseUrl, "tasks"), {
+    title,
+    description: "",
+    columnId,
   });
 }
 
 export async function createColumnRequest(title) {
-  await fetch(`${baseUrl}/columns/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: title,
-    }),
-  });
+  await axios.post(urljoin(baseUrl, "columns"), { title });
 }
 
 export async function deleteColumnRequest(id) {
-  await fetch(`${baseUrl}/columns/${id}`, {
-    method: "DELETE",
-  });
+  await axios.delete(urljoin(baseUrl, "columns", id.toString()));
 }

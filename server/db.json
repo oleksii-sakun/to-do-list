@@ -7,34 +7,22 @@
       "id": 3
     },
     {
-      "title": "кнопки удаления должны быть разными и меньше",
+      "title": "clean the car",
       "description": "",
       "columnId": 1,
-      "id": 26
+      "id": 4
     },
     {
-      "title": "123123123123",
+      "title": "learn React",
       "description": "",
       "columnId": 2,
-      "id": 28
+      "id": 5
     },
     {
-      "title": "wergergsegb",
+      "title": "learn JS",
       "description": "",
       "columnId": 3,
-      "id": 29
-    },
-    {
-      "title": "fvdfvd",
-      "description": "",
-      "columnId": 1,
-      "id": 30
-    },
-    {
-      "title": "evevf",
-      "description": "",
-      "columnId": 2,
-      "id": 31
+      "id": 6
     }
   ],
   "columns": [
