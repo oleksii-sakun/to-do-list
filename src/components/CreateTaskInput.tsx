@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Button, Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-export default function CreateTaskInput(props) {
+interface CreateTaskInputProps {
+  onAddTask: (inputValue: string) => void;
+}
+
+export default function CreateTaskInput(props: CreateTaskInputProps) {
   const [inputValue, setInput] = useState("");
 
-  function handleInputChange(event) {
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
   }
 
-  const handleActionForAddTaskButton = (value, column) => {
+  const handleActionForAddTaskButton = () => {
     if (inputValue) {
       props.onAddTask(inputValue);
       setInput("");
@@ -27,7 +31,7 @@ export default function CreateTaskInput(props) {
       <Button
         positive
         className="add_task_btn"
-        onClick={() => handleActionForAddTaskButton(inputValue, props.column)}
+        onClick={() => handleActionForAddTaskButton()}
       >
         Add task
       </Button>

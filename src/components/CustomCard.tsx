@@ -4,7 +4,13 @@ import { Button, Card } from "semantic-ui-react";
 import "./styles.css";
 import { Icon } from "semantic-ui-react";
 
-export default function CustomCard(props) {
+interface CustomCardProps {
+  title: string;
+  buttons: JSX.Element;
+  handleActionForDeleteTaskButtton: () => void;
+}
+
+export default function CustomCard(props: CustomCardProps) {
   return (
     <Card className="custom_card">
       <Card.Content>
@@ -16,7 +22,7 @@ export default function CustomCard(props) {
           <Icon name="trash" />
         </Button>
 
-        <Card.Content>{props.task}</Card.Content>
+        <Card.Content>{props.title}</Card.Content>
       </Card.Content>
 
       {props.buttons}

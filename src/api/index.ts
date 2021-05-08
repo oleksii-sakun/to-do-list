@@ -9,15 +9,18 @@ export default async function getData() {
   return data;
 }
 
-export async function deleteTaskRequest(id) {
+export async function deleteTaskRequest(id: number) {
   await axios.delete(urljoin(baseUrl, "tasks", id.toString()));
 }
 
-export async function changeTaskColumnIdRequest(taskId, columnId) {
+export async function changeTaskColumnIdRequest(
+  taskId: number,
+  columnId: number
+) {
   await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { columnId });
 }
 
-export async function createTaskRequest(title, columnId) {
+export async function createTaskRequest(title: string, columnId: number) {
   await axios.post(urljoin(baseUrl, "tasks"), {
     title,
     description: "",
@@ -25,10 +28,10 @@ export async function createTaskRequest(title, columnId) {
   });
 }
 
-export async function createColumnRequest(title) {
+export async function createColumnRequest(title: string) {
   await axios.post(urljoin(baseUrl, "columns"), { title });
 }
 
-export async function deleteColumnRequest(id) {
+export async function deleteColumnRequest(id: number) {
   await axios.delete(urljoin(baseUrl, "columns", id.toString()));
 }

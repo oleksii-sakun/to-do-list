@@ -1,13 +1,17 @@
 import React from "react";
 
-export default function List(props) {
+interface ListProps {
+  deleteColumnButton: JSX.Element;
+  title: string;
+}
+const List: React.FC<ListProps> = (props) => {
   return (
     <div className="list_item">
       {props.deleteColumnButton}
       <h1>{props.title}</h1>
-
-      {props.addColumnButton}
       {props.children}
     </div>
   );
-}
+};
+
+export default List;

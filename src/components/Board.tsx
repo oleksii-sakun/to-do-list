@@ -15,15 +15,29 @@ import {
 import { Button, Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
+export interface Column {
+  id: number;
+  title: string;
+  tasks: Task[];
+}
+
+export interface Task {
+  title: string;
+  description: string;
+  columnId: number;
+  id: number;
+}
+
 export default function Board() {
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(getAppDataAction()), [dispatch]);
+  useEffect(() => {
+    dispatch(getAppDataAction());
+  }, [dispatch]);
 
-  const appData = useSelector(({ app }) => app);
-  // const errorData = useSelector(({ error }) => error);
+  const appData = useSelector(({ app }: { app: Column[] }) => app);
 
-  const getMoveButtonsForTask = (taskId) => () => (
+  const getMoveButtonsForTask = (taskId: number) => () => (
     <div className="move_buttons">
       {appData.map((column) => (
         <Button
@@ -37,13 +51,13 @@ export default function Board() {
     </div>
   );
 
-  const AddColumnButton = () => {
+  const AddColumnButton = (): JSX.Element => {
     return (
       <div>
         <Input
           size="mini"
           placeholder="new column name"
-          onKeyPress={(event) => {
+          onKeyPress={(event: any) => {
             if (event.key === "Enter") {
               dispatch(createColumnAction(event.target.value));
             }
@@ -53,7 +67,7 @@ export default function Board() {
     );
   };
 
-  const getDeleteColumnButton = (columnId) => () => (
+  const getDeleteColumnButton = (columnId: number) => () => (
     <div>
       <Button
         size="mini"
@@ -73,7 +87,6 @@ export default function Board() {
         return (
           <List
             key={column.id}
-            className="column"
             deleteColumnButton={<DeleteColumnButton />}
             title={column.title}
           >
@@ -86,13 +99,12 @@ export default function Board() {
                   }}
                   buttons={<MoveButton />}
                   key={task.id}
-                  task={task.title}
+                  title={task.title}
                 />
               );
             })}
             <CreateTaskInput
-              column={column.id}
-              onAddTask={(title) =>
+              onAddTask={(title: string) =>
                 dispatch(createTaskAction(title, column.id))
               }
             />
