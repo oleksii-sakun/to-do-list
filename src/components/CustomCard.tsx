@@ -10,7 +10,7 @@ interface CustomCardProps {
   handleActionForDeleteTaskButtton: () => void;
 }
 
-export default function CustomCard(props: CustomCardProps) {
+export default function CustomCard(props: CustomCardProps): JSX.Element {
   return (
     <Card className="custom_card">
       <Card.Content>

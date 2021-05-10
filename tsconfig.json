@@ -15,7 +15,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "noImplicitReturns": true
+    "noUnusedParameters": true,
+    "noImplicitAny": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "typedef": [
+    true,
+    "call-signature",
+    "parameter",
+    "member-variable-declaration"
+  ]
 }

@@ -6,7 +6,9 @@ interface CreateTaskInputProps {
   onAddTask: (inputValue: string) => void;
 }
 
-export default function CreateTaskInput(props: CreateTaskInputProps) {
+export default function CreateTaskInput(
+  props: CreateTaskInputProps
+): JSX.Element {
   const [inputValue, setInput] = useState("");
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
