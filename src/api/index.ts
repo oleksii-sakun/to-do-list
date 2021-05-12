@@ -4,7 +4,7 @@ import { Column } from "../components/Board";
 
 const baseUrl = "http://localhost:3000";
 
-export default async function getData(): Promise<Column> {
+export default async function getData(): Promise<Column[]> {
   const { data } = await axios.get(urljoin(baseUrl, "columns?_embed=tasks"));
 
   return data;
@@ -28,6 +28,7 @@ export async function createTaskRequest(
   await axios.post(urljoin(baseUrl, "tasks"), {
     title,
     description: "",
+    color: "white",
     columnId,
   });
 }
@@ -38,4 +39,11 @@ export async function createColumnRequest(title: string): Promise<void> {
 
 export async function deleteColumnRequest(id: number): Promise<void> {
   await axios.delete(urljoin(baseUrl, "columns", id.toString()));
+}
+
+export async function changeTaskColorRequest(
+  taskId: number,
+  color: string
+): Promise<void> {
+  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { color });
 }

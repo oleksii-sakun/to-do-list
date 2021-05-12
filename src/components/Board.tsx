@@ -11,8 +11,9 @@ import {
   deleteTaskAction,
   getAppDataAction,
   updateTaskColumnIdAction,
+  changeTaskColorAction,
 } from "../redux/actions/inputAction";
-import { Button, Input } from "semantic-ui-react";
+import { Button, Input, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
 export interface Column {
@@ -25,6 +26,7 @@ export interface Task {
   title: string;
   description: string;
   columnId: number;
+  color: SemanticCOLORS;
   id: number;
 }
 
@@ -37,20 +39,28 @@ export default function Board(): JSX.Element {
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
 
-  const GetMoveButtonsForTask = (taskId: number) => {
+  const GetMoveButtonsForTask = (taskId: number, columnId: number) => {
     return (
       <div className="move_buttons">
-        {appData.map((column) => (
-          <Button
-            size="mini"
-            key={column.id}
-            onClick={() =>
-              dispatch(updateTaskColumnIdAction(taskId, column.id))
+        {appData
+          .filter((column) => {
+            if (column.id !== columnId) {
+              return true;
             }
-          >
-            {column.title}
-          </Button>
-        ))}
+          })
+          .map((column) => {
+            return (
+              <Button
+                size="mini"
+                key={column.id}
+                onClick={() =>
+                  dispatch(updateTaskColumnIdAction(taskId, column.id))
+                }
+              >
+                {column.title}
+              </Button>
+            );
+          })}
       </div>
     );
   };
@@ -86,6 +96,13 @@ export default function Board(): JSX.Element {
     );
   };
 
+  const ChangeTaskColor = () => {
+    appData.map((column) => {
+      column.tasks.map((task) => console.log(task.color));
+    });
+  };
+  ChangeTaskColor();
+
   return (
     <div className="board">
       {appData.map((column) => {
@@ -95,15 +112,19 @@ export default function Board(): JSX.Element {
             deleteColumnButton={GetDeleteColumnButton(column.id)}
             title={column.title}
           >
-            {column.tasks.map((task: Task) => {
+            {column.tasks.map((task) => {
               return (
                 <CustomCard
                   handleActionForDeleteTaskButtton={() => {
                     dispatch(deleteTaskAction(task.id));
                   }}
-                  buttons={GetMoveButtonsForTask(task.id)}
+                  buttons={GetMoveButtonsForTask(task.id, column.id)}
                   key={task.id}
                   title={task.title}
+                  color={task.color}
+                  onChangeColor={(color: string) =>
+                    dispatch(changeTaskColorAction(task.id, color))
+                  }
                 />
               );
             })}

@@ -3,26 +3,58 @@
     {
       "title": "clean the car",
       "description": "",
-      "columnId": 1,
+      "columnId": 3,
+      "color": "yellow",
       "id": 4
     },
     {
       "title": "learn React",
       "description": "",
       "columnId": 2,
+      "color": "red",
       "id": 5
     },
     {
       "title": "learn JS",
       "description": "",
       "columnId": 3,
+      "color": "yellow",
       "id": 6
     },
     {
-      "title": "Check homework",
+      "title": "выбор цвета",
       "description": "",
-      "columnId": 2,
-      "id": 9
+      "columnId": 1,
+      "color": "yellow",
+      "id": 11
+    },
+    {
+      "title": "модалка с дедлайном",
+      "description": "",
+      "columnId": 1,
+      "color": "red",
+      "id": 12
+    },
+    {
+      "title": "логин регистрация",
+      "description": "",
+      "columnId": 1,
+      "color": "blue",
+      "id": 13
+    },
+    {
+      "title": "убрать текущую коллонку в перемещениии",
+      "description": "",
+      "columnId": 3,
+      "color": "yellow",
+      "id": 14
+    },
+    {
+      "title": "gfbfgb",
+      "description": "",
+      "color": "yellow",
+      "columnId": 3,
+      "id": 16
     }
   ],
   "columns": [
@@ -38,5 +70,9 @@
       "id": 3,
       "title": "Done"
     }
+  ],
+  "users": [
+    { "login": "Alex", "password": "34573457" },
+    { "login": "Artur", "password": "12345678" }
   ]
 }

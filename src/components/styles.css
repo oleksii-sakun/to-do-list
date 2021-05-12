@@ -69,3 +69,8 @@
 .positive.add_task_btn {
   margin: 0 0 0 9px;
 }
+.ui.selection.dropdown {
+  min-width: 25px;
+  min-height: 15px;
+  float: right;
+}
