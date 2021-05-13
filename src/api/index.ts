@@ -28,7 +28,7 @@ export async function createTaskRequest(
   await axios.post(urljoin(baseUrl, "tasks"), {
     title,
     description: "",
-    color: "white",
+    color: "#FFFFFF",
     columnId,
   });
 }

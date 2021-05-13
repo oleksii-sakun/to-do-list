@@ -41,7 +41,7 @@ export default function Board(): JSX.Element {
 
   const GetMoveButtonsForTask = (taskId: number, columnId: number) => {
     return (
-      <div className="move_buttons">
+      <div className="move-buttons-container">
         {appData
           .filter((column) => {
             if (column.id !== columnId) {
@@ -51,6 +51,7 @@ export default function Board(): JSX.Element {
           .map((column) => {
             return (
               <Button
+                className="move-buttons-container__btn"
                 size="mini"
                 key={column.id}
                 onClick={() =>
@@ -95,13 +96,6 @@ export default function Board(): JSX.Element {
       </div>
     );
   };
-
-  const ChangeTaskColor = () => {
-    appData.map((column) => {
-      column.tasks.map((task) => console.log(task.color));
-    });
-  };
-  ChangeTaskColor();
 
   return (
     <div className="board">

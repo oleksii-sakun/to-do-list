@@ -4,6 +4,7 @@ import { Button, Card, Select } from "semantic-ui-react";
 import "./styles.css";
 import { Icon } from "semantic-ui-react";
 import { SemanticCOLORS } from "semantic-ui-react/dist/commonjs/generic";
+import { ColorItem } from "./ColorItem";
 
 interface CustomCardProps {
   title: string;
@@ -18,43 +19,32 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
     {
       key: "yellow",
       value: "yellow",
-      text: (
-        <div
-          style={{
-            width: 20,
-            height: 20,
-            background: "#CEFF00",
-          }}
-        ></div>
-      ),
+      text: <ColorItem color="#CEFF00" />,
     },
     {
       key: "blue",
       value: "blue",
-      text: (
-        <div style={{ width: 20, height: 20, background: "#0048BA" }}></div>
-      ),
+      text: <ColorItem color="#0048BA" />,
     },
     {
       key: "green",
       value: "green",
-      text: (
-        <div style={{ width: 20, height: 20, background: "#00FF00" }}></div>
-      ),
+      text: <ColorItem color="#00FF00" />,
     },
     {
       key: "red",
       value: "red",
-      text: (
-        <div style={{ width: 20, height: 20, background: "#FF0800" }}></div>
-      ),
+      text: <ColorItem color="#FF0800" />,
     },
     {
       key: "teal",
       value: "teal",
-      text: (
-        <div style={{ width: 20, height: 20, background: "#008080" }}></div>
-      ),
+      text: <ColorItem color="#008080" />,
+    },
+    {
+      key: "white",
+      value: "#FFFFFF",
+      text: <ColorItem color="#FFFFFF" />,
     },
   ];
 
@@ -82,14 +72,16 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
         </Button>
 
         <Card.Content>{props.title}</Card.Content>
+      </Card.Content>
+
+      <div className="custom-card__footer">
         <Select
           value={props.color}
           options={colorOptions}
           onChange={handleChangeCardColor}
         />
-      </Card.Content>
-
-      {props.buttons}
+        {props.buttons}
+      </div>
     </Card>
   );
 }

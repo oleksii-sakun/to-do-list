@@ -34,10 +34,13 @@
   padding: 3px;
 }
 
-.move_buttons {
+.move-buttons-container {
   display: flex;
-  justify-content: space-around;
-  margin: 0 0 14px 0;
+  justify-content: flex-end;
+}
+
+.move-buttons-container__btn {
+  margin-left: 5px !important;
 }
 
 .content {
@@ -72,5 +75,11 @@
 .ui.selection.dropdown {
   min-width: 25px;
   min-height: 15px;
-  float: right;
+}
+
+.custom-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
 }
