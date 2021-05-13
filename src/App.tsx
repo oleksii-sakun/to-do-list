@@ -1,14 +1,17 @@
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Board from "./components/Board";
 import store from "./redux/store";
+import "react-toastify/dist/ReactToastify.css";
+import React from "react";
 
-function App() {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1 className="board_title">To-do-board</h1>
         <Board></Board>
+        <ToastContainer></ToastContainer>
       </div>
     </Provider>
   );

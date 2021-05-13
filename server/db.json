@@ -1,34 +1,221 @@
 {
   "tasks": [
     {
-      "title": "col1",
+      "title": "выбор цвета",
       "description": "",
-      "columnId": "1",
-      "id": 3
+      "columnId": 3,
+      "color": "yellow",
+      "id": 11
     },
     {
-      "title": "кнопки удаления должны быть разными и меньше",
+      "title": "модалка с дедлайном",
       "description": "",
+      "columnId": 1,
+      "color": "red",
+      "id": 12
+    },
+    {
+      "title": "логин регистрация",
+      "description": "",
+      "columnId": 2,
+      "color": "red",
+      "id": 13
+    },
+    {
+      "title": "убрать текущую коллонку в перемещениии",
+      "description": "",
+      "columnId": 3,
+      "color": "yellow",
+      "id": 14
+    },
+    {
+      "title": "SAAS",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 17
+    },
+    {
+      "title": "БЭМ",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 18
+    },
+    {
+      "title": "JWT",
+      "description": "",
+      "color": "#FFFFFF",
+      "columnId": 1,
+      "id": 19
+    },
+    {
+      "title": "youtube JWT",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 20
+    },
+    {
+      "title": "reduce",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 21
+    },
+    {
+      "title": "event loop",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 22
+    },
+    {
+      "title": "this",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 23
+    },
+    {
+      "title": "замыкания, рекурсия",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 24
+    },
+    {
+      "title": "  http  status code",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 25
+    },
+    {
+      "title": "cookie",
+      "description": "",
+      "color": "green",
       "columnId": 1,
       "id": 26
     },
     {
-      "title": "tttt",
+      "title": "debugger",
       "description": "",
-      "columnId": 3,
+      "color": "green",
+      "columnId": 1,
       "id": 27
     },
     {
-      "title": "123123123123",
+      "title": "всплытие",
       "description": "",
-      "columnId": 2,
+      "color": "red",
+      "columnId": 1,
       "id": 28
     },
     {
-      "title": "wergergsegb",
+      "title": "event bubbling",
       "description": "",
-      "columnId": 3,
+      "color": "red",
+      "columnId": 1,
       "id": 29
+    },
+    {
+      "title": "bind, call, apply",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 30
+    },
+    {
+      "title": "DOM почитать",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 31
+    },
+    {
+      "title": "Virtual DOM, Shadow DOM",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 32
+    },
+    {
+      "title": "мемоизация",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 33
+    },
+    {
+      "title": "GIT Reset, Head",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 34
+    },
+    {
+      "title": "XSS кроссайт скриптинг",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 35
+    },
+    {
+      "title": "HTTPS",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 36
+    },
+    {
+      "title": "pixel, em, rm",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 37
+    },
+    {
+      "title": "JSX",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 38
+    },
+    {
+      "title": "create Ref, use Ref",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 39
+    },
+    {
+      "title": "pakage lock. json",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 40
+    },
+    {
+      "title": "ООП",
+      "description": "",
+      "color": "red",
+      "columnId": 1,
+      "id": 41
+    },
+    {
+      "title": "DRY",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 42
+    },
+    {
+      "title": "kiss",
+      "description": "",
+      "color": "green",
+      "columnId": 1,
+      "id": 43
     }
   ],
   "columns": [
@@ -43,6 +230,16 @@
     {
       "id": 3,
       "title": "Done"
+    }
+  ],
+  "users": [
+    {
+      "login": "Alex",
+      "password": "34573457"
+    },
+    {
+      "login": "Artur",
+      "password": "12345678"
     }
   ]
 }
