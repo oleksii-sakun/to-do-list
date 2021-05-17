@@ -7,12 +7,12 @@
   min-width: 100%;
   box-sizing: border-box;
   background-color: #ccd6c9;
-}
-.board .board_title {
-  display: flex;
-  justify-content: center;
-  font-size: 20px;
-  color: #2c3e5d;
+  .board_title {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #2c3e5d;
+  }
 }
 
 .list_item {
@@ -22,10 +22,10 @@
   border-radius: 4px;
   background-color: #ebecf0;
   margin: 0 5px;
-}
-.list_itemh1 {
-  color: #2c3e5d;
-  font-size: 22px;
+  & h1 {
+    color: #2c3e5d;
+    font-size: 22px;
+  }
 }
 
 .delete_column_btn {
@@ -71,7 +71,6 @@
 .positive.add_task_btn {
   margin: 0 0 0 9px;
 }
-
 .ui.selection.dropdown {
   min-width: 25px;
   min-height: 15px;
@@ -95,5 +94,3 @@
   border-radius: 4px;
   padding: 10px;
 }
-
-/*# sourceMappingURL=styles.css.map */

@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import urljoin from "url-join";
 import { Column } from "../components/Board";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3001";
 
 export default async function getData(): Promise<Column[]> {
   const { data } = await axios.get(urljoin(baseUrl, "columns?_embed=tasks"));
@@ -46,4 +46,24 @@ export async function changeTaskColorRequest(
   color: string
 ): Promise<void> {
   await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { color });
+}
+
+export async function singUpRequest(
+  login: string,
+  password: string
+): Promise<void> {
+  await axios.post(urljoin(baseUrl, "users"), { login, password });
+}
+
+export interface User {
+  login: string;
+  password: string;
+  id: number;
+}
+
+export async function singInRequest(
+  login: string
+): Promise<AxiosResponse<User[]>> {
+  const userData = await axios.get(urljoin(baseUrl, `users?login=${login}`));
+  return userData;
 }

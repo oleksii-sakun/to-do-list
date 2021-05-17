@@ -32,7 +32,7 @@
       "title": "SAAS",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "columnId": 2,
       "id": 17
     },
     {
@@ -216,6 +216,13 @@
       "color": "green",
       "columnId": 1,
       "id": 43
+    },
+    {
+      "title": "Check homework",
+      "description": "",
+      "columnId": 2,
+      "id": 44,
+      "color": "yellow"
     }
   ],
   "columns": [
@@ -235,11 +242,13 @@
   "users": [
     {
       "login": "Alex",
-      "password": "34573457"
+      "password": "11111111",
+      "id": 1
     },
     {
       "login": "Artur",
-      "password": "12345678"
+      "password": "12345678",
+      "id": 2
     }
   ]
 }
