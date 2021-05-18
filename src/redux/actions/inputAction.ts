@@ -8,18 +8,30 @@ import getData, {
   createTaskRequest,
   deleteColumnRequest,
   deleteTaskRequest,
+  singInRequest,
+  singUpRequest,
 } from "../../api";
 import { Column } from "../../components/Board";
-import { SET_APP_DATA } from "../constants";
+import { ActionTypes } from "../constants";
 
 interface SetAppDataAction {
   type: string;
   payload: Column[];
 }
 
+interface SetAutorizationStatusAction {
+  type: string;
+  payload: boolean;
+}
+
 export const setAppDataAction = (payload: Column[]): SetAppDataAction => ({
-  type: SET_APP_DATA,
+  type: ActionTypes.SET_APP_DATA,
   payload,
+});
+
+export const setAutorizationStatusAction = (): SetAutorizationStatusAction => ({
+  type: ActionTypes.SET_AUTORIZATION_STATUS,
+  payload: true,
 });
 
 async function handleRequestSuccess(dispatch: Dispatch<unknown>) {
@@ -86,7 +98,6 @@ export const deleteColumnAction =
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await deleteColumnRequest(id);
-      await getData();
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);
@@ -98,9 +109,22 @@ export const changeTaskColorAction =
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await changeTaskColorRequest(id, color);
-      await getData();
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+export const singUpAction =
+  (login: string, password: string) =>
+  async (dispatch: Dispatch<unknown>): Promise<void> => {
+    await singUpRequest(login, password);
+    handleRequestSuccess(dispatch);
+  };
+
+export const singInAction =
+  (login: string) =>
+  async (dispatch: Dispatch<unknown>): Promise<void> => {
+    await singInRequest(login);
+    handleRequestSuccess(dispatch);
   };

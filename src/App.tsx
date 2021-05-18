@@ -13,7 +13,6 @@ function App(): JSX.Element {
   const autorizationStatus = useSelector(
     (store: RootStateOrAny) => store.autorization
   );
-  console.log(autorizationStatus);
 
   return (
     <div className="App">

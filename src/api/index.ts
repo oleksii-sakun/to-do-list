@@ -2,6 +2,12 @@ import axios, { AxiosResponse } from "axios";
 import urljoin from "url-join";
 import { Column } from "../components/Board";
 
+export interface User {
+  login: string;
+  password: string;
+  id: number;
+}
+
 const baseUrl = "http://localhost:3001";
 
 export default async function getData(): Promise<Column[]> {
@@ -53,12 +59,6 @@ export async function singUpRequest(
   password: string
 ): Promise<void> {
   await axios.post(urljoin(baseUrl, "users"), { login, password });
-}
-
-export interface User {
-  login: string;
-  password: string;
-  id: number;
 }
 
 export async function singInRequest(

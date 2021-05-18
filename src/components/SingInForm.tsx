@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { singInRequest } from "../api";
-import { setAutorizationStatusAction } from "../redux/actions/autorizationAction";
+import { setAutorizationStatusAction } from "../redux/actions/inputAction";
+import { Props } from "./SingUpForm";
 
-export default function SingInForm(props: { history: string[] }): JSX.Element {
+export default function SingInForm(props: Props): JSX.Element {
   const dispatch = useDispatch();
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  let userDataFromDataBase;
 
-  async function checkUserData() {
-    const promise = await singInRequest(userLogin);
-    userDataFromDataBase = promise.data;
+  async function checkUserPassword() {
+    const userData = await singInRequest(userLogin);
+    const userDataFromDataBase = userData.data;
 
     userDataFromDataBase.map((user) => {
       if (userPassword === user.password) {
@@ -27,19 +27,17 @@ export default function SingInForm(props: { history: string[] }): JSX.Element {
   }
 
   const handleLoginChange = (
-    event: React.SyntheticEvent<HTMLElement, Event>,
+    _event: React.SyntheticEvent<HTMLElement, Event>,
     data: any
   ) => {
     setUserLogin(data.value);
-    console.log("event:", event, "data", data.value);
   };
 
   const handlePasswordChange = (
-    event: React.SyntheticEvent<HTMLElement, Event>,
+    _event: React.SyntheticEvent<HTMLElement, Event>,
     data: any
   ) => {
     setUserPassword(data.value);
-    console.log("event:", event, "data", data.value);
   };
 
   return (
@@ -55,7 +53,7 @@ export default function SingInForm(props: { history: string[] }): JSX.Element {
           <FormInput placeholder="password" onChange={handlePasswordChange} />
         </Form.Field>
 
-        <Button type="submit" onClick={checkUserData}>
+        <Button type="submit" onClick={checkUserPassword}>
           Submit
         </Button>
         <Button>

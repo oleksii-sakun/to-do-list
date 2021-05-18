@@ -1,4 +1,4 @@
-import { SET_AUTORIZATION_STATUS_TRUE } from "../constants";
+import { ActionTypes } from "../constants";
 
 const initialState = false;
 
@@ -7,7 +7,7 @@ export default function autorizationReducer(
   action: { type: string; payload: boolean }
 ): boolean {
   switch (action.type) {
-    case SET_AUTORIZATION_STATUS_TRUE: {
+    case ActionTypes.SET_AUTORIZATION_STATUS: {
       return action.payload;
     }
 

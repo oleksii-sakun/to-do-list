@@ -9,7 +9,7 @@ const List: React.FC<ListProps> = (props: ListProps) => {
   return (
     <div className="list_item">
       {props.deleteColumnButton}
-      <h1>{props.title}</h1>
+      <h1 className="list-item_title">{props.title}</h1>
       {props.children}
     </div>
   );

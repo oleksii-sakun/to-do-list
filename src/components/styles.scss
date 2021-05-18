@@ -22,7 +22,7 @@
   border-radius: 4px;
   background-color: #ebecf0;
   margin: 0 5px;
-  & h1 {
+  .list-item_title {
     color: #2c3e5d;
     font-size: 22px;
   }
@@ -30,16 +30,14 @@
 
 .delete_column_btn {
   float: right;
-  padding: 3px;
 }
 
 .move-buttons-container {
   display: flex;
   justify-content: flex-end;
-}
-
-.move-buttons-container__btn {
-  margin-left: 5px !important;
+  &__btn {
+    margin-left: 5px !important;
+  }
 }
 
 .content {

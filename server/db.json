@@ -220,7 +220,7 @@
     {
       "title": "Check homework",
       "description": "",
-      "columnId": 2,
+      "columnId": 3,
       "id": 44,
       "color": "yellow"
     }
@@ -249,6 +249,16 @@
       "login": "Artur",
       "password": "12345678",
       "id": 2
+    },
+    {
+      "login": "vasya",
+      "password": "1111",
+      "id": 3
+    },
+    {
+      "login": "kolya",
+      "password": "1111",
+      "id": 4
     }
   ]
 }
