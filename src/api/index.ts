@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import urljoin from "url-join";
 import { Column } from "../components/Board";
+import { Moment } from "moment";
 
 export interface User {
   login: string;
@@ -25,6 +26,20 @@ export async function changeTaskColumnIdRequest(
   columnId: number
 ): Promise<void> {
   await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { columnId });
+}
+
+export async function editTaskTitleRequest(
+  taskId: number,
+  title: string
+): Promise<void> {
+  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { title });
+}
+
+export async function addTaskDeadlineRequest(
+  taskId: number,
+  date: Moment
+): Promise<void> {
+  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { date });
 }
 
 export async function createTaskRequest(

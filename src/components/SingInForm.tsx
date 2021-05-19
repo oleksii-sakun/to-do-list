@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { singInRequest } from "../api";
-import { setAutorizationStatusAction } from "../redux/actions/inputAction";
+import { setAutorizationStatusAction } from "../redux/actions/autorizationAction";
 import { Props } from "./SingUpForm";
 
 export default function SingInForm(props: Props): JSX.Element {

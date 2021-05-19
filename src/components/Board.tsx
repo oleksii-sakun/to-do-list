@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CreateTaskInput from "./CreateTaskInput";
 import List from "./List";
 import CustomCard from "./CustomCard";
@@ -13,8 +13,9 @@ import {
   updateTaskColumnIdAction,
   changeTaskColorAction,
 } from "../redux/actions/inputAction";
-import { Button, Input, SemanticCOLORS } from "semantic-ui-react";
+import { Button, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
+import { Moment } from "moment";
 
 export interface Column {
   id: number;
@@ -27,14 +28,18 @@ export interface Task {
   description: string;
   columnId: number;
   color: SemanticCOLORS;
+  date: Moment;
   id: number;
 }
 
 export default function Board(): JSX.Element {
   const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     dispatch(getAppDataAction());
+    setTimeout(() => setLoading(false), 50);
   }, [dispatch]);
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
@@ -99,6 +104,7 @@ export default function Board(): JSX.Element {
 
   return (
     <div className="board">
+      <Loader active={loading} size="big" />
       {appData.map((column) => {
         return (
           <List
@@ -115,6 +121,8 @@ export default function Board(): JSX.Element {
                   buttons={GetMoveButtonsForTask(task.id, column.id)}
                   key={task.id}
                   title={task.title}
+                  date={task.date}
+                  id={task.id}
                   color={task.color}
                   onChangeColor={(color: string) =>
                     dispatch(changeTaskColorAction(task.id, color))

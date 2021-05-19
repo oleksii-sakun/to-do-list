@@ -2,26 +2,22 @@ import { Dispatch } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getData, {
+  addTaskDeadlineRequest,
   changeTaskColorRequest,
   changeTaskColumnIdRequest,
   createColumnRequest,
   createTaskRequest,
   deleteColumnRequest,
   deleteTaskRequest,
-  singInRequest,
-  singUpRequest,
+  editTaskTitleRequest,
 } from "../../api";
 import { Column } from "../../components/Board";
 import { ActionTypes } from "../constants";
+import { Moment } from "moment";
 
 interface SetAppDataAction {
   type: string;
   payload: Column[];
-}
-
-interface SetAutorizationStatusAction {
-  type: string;
-  payload: boolean;
 }
 
 export const setAppDataAction = (payload: Column[]): SetAppDataAction => ({
@@ -29,12 +25,9 @@ export const setAppDataAction = (payload: Column[]): SetAppDataAction => ({
   payload,
 });
 
-export const setAutorizationStatusAction = (): SetAutorizationStatusAction => ({
-  type: ActionTypes.SET_AUTORIZATION_STATUS,
-  payload: true,
-});
-
-async function handleRequestSuccess(dispatch: Dispatch<unknown>) {
+export async function handleRequestSuccess(
+  dispatch: Dispatch<unknown>
+): Promise<void> {
   try {
     const data = await getData();
     dispatch(setAppDataAction(data));
@@ -82,6 +75,28 @@ export const updateTaskColumnIdAction =
     }
   };
 
+export const editTaskTitleAction =
+  (taskId: number, title: string) =>
+  async (dispatch: Dispatch<unknown>): Promise<void> => {
+    try {
+      await editTaskTitleRequest(taskId, title);
+      handleRequestSuccess(dispatch);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+export const addTaskDedalineAction =
+  (taskId: number, date: Moment) =>
+  async (dispatch: Dispatch<unknown>): Promise<void> => {
+    try {
+      await addTaskDeadlineRequest(taskId, date);
+      handleRequestSuccess(dispatch);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
 export const createColumnAction =
   (title: string) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
@@ -113,18 +128,4 @@ export const changeTaskColorAction =
     } catch (error) {
       toast.error(error.message);
     }
-  };
-
-export const singUpAction =
-  (login: string, password: string) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    await singUpRequest(login, password);
-    handleRequestSuccess(dispatch);
-  };
-
-export const singInAction =
-  (login: string) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    await singInRequest(login);
-    handleRequestSuccess(dispatch);
   };
