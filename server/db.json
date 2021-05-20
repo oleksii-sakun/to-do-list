@@ -13,19 +13,19 @@
       "description": "",
       "columnId": 2,
       "color": "red",
-      "date": "2021-05-05T13:55:41.566Z",
+      "date": "19-05-2021",
       "id": 13
     },
     {
       "title": "SAAS",
       "description": "",
       "color": "green",
-      "date": "20-05-2021",
+      "date": "18-05-2021",
       "columnId": 3,
       "id": 17
     },
     {
-      "title": "БЭМ-БЭМ-БЭМ",
+      "title": "БЭМ",
       "description": "",
       "color": "green",
       "date": "20-05-2021",
@@ -231,6 +231,27 @@
       "date": "20-05-2021",
       "columnId": 1,
       "id": 43
+    },
+    {
+      "title": "модалка на удаление",
+      "description": "",
+      "color": "#FFFFFF",
+      "columnId": 2,
+      "id": 46
+    },
+    {
+      "title": "селектом кнопки",
+      "description": "",
+      "color": "#FFFFFF",
+      "columnId": 2,
+      "id": 47
+    },
+    {
+      "title": "элементы в правом нижнем углу",
+      "description": "",
+      "color": "#FFFFFF",
+      "columnId": 2,
+      "id": 48
     }
   ],
   "columns": [

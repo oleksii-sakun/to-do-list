@@ -13,17 +13,16 @@ export default function SingInForm(props: Props): JSX.Element {
   const [userPassword, setUserPassword] = useState("");
 
   async function checkUserPassword() {
-    const userData = await singInRequest(userLogin);
-    const userDataFromDataBase = userData.data;
+    const userData = await singInRequest(userLogin, userPassword);
 
-    userDataFromDataBase.map((user) => {
-      if (userPassword === user.password) {
-        dispatch(setAutorizationStatusAction());
-        props.history.push("/board");
-      } else {
-        toast.error("Your login or password is not correct");
-      }
-    });
+    if (userData.data.length) {
+      dispatch(setAutorizationStatusAction());
+      localStorage.setItem("login", userLogin);
+      localStorage.setItem("password", userPassword);
+      props.history.push("/board");
+    } else {
+      toast.error("Your login or password is not correct");
+    }
   }
 
   const handleLoginChange = (

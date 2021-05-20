@@ -19,7 +19,7 @@ interface CustomCardProps {
   buttons: JSX.Element;
   color: SemanticCOLORS;
   id: number;
-  date: Moment;
+  date: string;
   handleActionForDeleteTaskButtton: () => void;
   onChangeColor: (color: string) => void;
 }
@@ -30,7 +30,7 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
   const [editable, setEditable] = useState(false);
   const [inputValue, setEditInputValue] = useState(props.title);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [dateDeadline, setDateDeaeline] = useState(props.date);
+  const [dateDeadline, setDateDeadeline] = useState(props.date);
 
   const colorOptions = [
     {
@@ -99,60 +99,73 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
   };
 
   const handleDateSelect = (date: Moment) => {
-    setDateDeaeline(date);
-    addTaskDedalineAction(props.id, date);
+    setDateDeadeline(date.format("DD-MM-YYYY").toString());
+    dispatch(
+      addTaskDedalineAction(props.id, date.format("DD-MM-YYYY").toString())
+    );
   };
 
   return (
-    <Card className="custom_card" color={props.color}>
-      <Card.Content>
-        <div style={{ width: 50 }}></div>
-
-        <Button
-          floated="right"
-          size="tiny"
-          onClick={props.handleActionForDeleteTaskButtton}
-        >
-          <Icon name="trash" />
-        </Button>
-
+    <Card color={props.color}>
+      <div className="custom-card">
         <Card.Content>
-          {editable ? (
-            <div>
-              <Input
-                value={inputValue}
-                onChange={handleChangeTaskTitile}
-              ></Input>
-              <Button
-                size="mini"
-                onClick={() => handleEditCardTitle(props.id, inputValue)}
-              >
-                Save
-              </Button>
-            </div>
-          ) : (
-            props.title
-          )}
+          <div style={{ width: 50 }}></div>
 
-          <Card.Content>{dateDeadline}</Card.Content>
+          <Button
+            floated="right"
+            size="tiny"
+            onClick={props.handleActionForDeleteTaskButtton}
+          >
+            <Icon name="trash" />
+          </Button>
+
+          <Card.Content>
+            {editable ? (
+              <div>
+                <Input
+                  value={inputValue}
+                  onChange={handleChangeTaskTitile}
+                ></Input>
+                <Button
+                  size="mini"
+                  onClick={() => handleEditCardTitle(props.id, inputValue)}
+                >
+                  Save
+                </Button>
+              </div>
+            ) : (
+              props.title
+            )}
+
+            <Card.Content>Deadline: {dateDeadline}</Card.Content>
+          </Card.Content>
         </Card.Content>
-      </Card.Content>
 
-      <div className="custom-card__footer">
-        <Select
-          value={props.color}
-          options={colorOptions}
-          onChange={handleChangeCardColor}
-        />
-        {props.buttons}
-      </div>
-      <div>
-        <Button onClick={handleChangeEditableStatus}>
-          <Icon name="edit" className="etit-task-btn"></Icon>
-        </Button>
-        <Button onClick={handleShowCalendar}>
-          <Icon name="calendar alternate outline"></Icon>
-        </Button>
+        <div className="custom-card__footer">
+          <Select
+            value={props.color}
+            options={colorOptions}
+            onChange={handleChangeCardColor}
+          />
+          {props.buttons}
+        </div>
+        <div className="edit-calendar">
+          <Button
+            onClick={handleChangeEditableStatus}
+            className="edit-calendar__btn show-calendar__btn"
+            size="mini"
+          >
+            <Icon name="edit"></Icon>
+          </Button>
+          <Button
+            onClick={handleShowCalendar}
+            className="edit-calendar__btn"
+            size="mini"
+          >
+            <Icon name="calendar alternate outline"></Icon>
+          </Button>
+        </div>
+
         <div>
           {showCalendar ? (
             <div className="site-calendar-demo-card">

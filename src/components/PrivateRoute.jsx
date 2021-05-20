@@ -9,7 +9,7 @@ export const PrivateRoute = ({ component: Component, isSinged, ...rest }) => {
         return isSinged ? (
           <Component {...props} {...rest} />
         ) : (
-          <Redirect to="/" />
+          <Redirect to="/singIn" />
         );
       }}
     />

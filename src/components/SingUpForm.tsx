@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
-import { singInRequest } from "../api";
+import { loginCheckRequest, singInRequest } from "../api";
 import { singUpAction } from "../redux/actions/autorizationAction";
 
 export interface Props {
@@ -19,7 +19,7 @@ export default function SingUpForm(props: Props): JSX.Element {
   const [userPassword, setUserPassword] = useState("");
   const [userRepeatPassword, setUserRepeatPassword] = useState("");
   const [disabled, setSumbmitButton] = useState(false);
-  const [inputColor, setInputColor] = useState("");
+  const [inputColor, setInputColor] = useState(false);
   const dispatch = useDispatch();
 
   const isPasswordsMatched = userPassword === userRepeatPassword;
@@ -41,7 +41,7 @@ export default function SingUpForm(props: Props): JSX.Element {
     _event: React.SyntheticEvent<HTMLElement, Event>,
     data: any
   ) {
-    const userData = await singInRequest(data.value);
+    const userData = await loginCheckRequest(data.value);
     const userDataFromDataBase = userData.data;
     let userLoginFromDataBase;
     // const isLoginInvalid = userData.data.some(
@@ -52,12 +52,11 @@ export default function SingUpForm(props: Props): JSX.Element {
       (user) => (userLoginFromDataBase = user.login)
     );
     if (userLoginFromDataBase) {
-      // toast.error("This login is already used by another user");
-      setInputColor("1px solid red");
+      setInputColor(true);
       setSumbmitButton(true);
       setUserLogin(data.value);
     } else {
-      setInputColor("");
+      setInputColor(false);
       setUserLogin(data.value);
       setSumbmitButton(false);
     }
@@ -85,7 +84,7 @@ export default function SingUpForm(props: Props): JSX.Element {
           <FormInput
             placeholder="login"
             onChange={debounceHandleLoginChange}
-            style={{ borderRadius: ".28571429rem", border: inputColor }}
+            error={inputColor}
           />
         </Form.Field>
         <Form.Field>

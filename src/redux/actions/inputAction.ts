@@ -87,7 +87,7 @@ export const editTaskTitleAction =
   };
 
 export const addTaskDedalineAction =
-  (taskId: number, date: Moment) =>
+  (taskId: number, date: string) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await addTaskDeadlineRequest(taskId, date);

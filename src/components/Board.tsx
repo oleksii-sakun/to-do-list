@@ -13,9 +13,9 @@ import {
   updateTaskColumnIdAction,
   changeTaskColorAction,
 } from "../redux/actions/inputAction";
-import { Button, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
+import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import { Moment } from "moment";
+import { Props } from "./SingUpForm";
 
 export interface Column {
   id: number;
@@ -28,11 +28,11 @@ export interface Task {
   description: string;
   columnId: number;
   color: SemanticCOLORS;
-  date: Moment;
+  date: string;
   id: number;
 }
 
-export default function Board(): JSX.Element {
+export default function Board(props: Props): JSX.Element {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -102,43 +102,62 @@ export default function Board(): JSX.Element {
     );
   };
 
+  const userLoginFromLocalStorage = localStorage.getItem("login");
+
+  const handleLogout = () => {
+    localStorage.removeItem("login");
+    localStorage.removeItem("password");
+    props.history.push("/singIn");
+  };
+
   return (
-    <div className="board">
-      <Loader active={loading} size="big" />
-      {appData.map((column) => {
-        return (
-          <List
-            key={column.id}
-            deleteColumnButton={GetDeleteColumnButton(column.id)}
-            title={column.title}
-          >
-            {column.tasks.map((task) => {
-              return (
-                <CustomCard
-                  handleActionForDeleteTaskButtton={() => {
-                    dispatch(deleteTaskAction(task.id));
-                  }}
-                  buttons={GetMoveButtonsForTask(task.id, column.id)}
-                  key={task.id}
-                  title={task.title}
-                  date={task.date}
-                  id={task.id}
-                  color={task.color}
-                  onChangeColor={(color: string) =>
-                    dispatch(changeTaskColorAction(task.id, color))
-                  }
-                />
-              );
-            })}
-            <CreateTaskInput
-              onAddTask={(title: string) =>
-                dispatch(createTaskAction(title, column.id))
-              }
-            />
-          </List>
-        );
-      })}
-      {<AddColumnButton />}
+    <div>
+      <header className="board-header">
+        <div>
+          <span className="logout">Hello,{userLoginFromLocalStorage}!</span>
+          <Button size="mini" className="singout-btn" onClick={handleLogout}>
+            <Icon name="sign out alternate"></Icon>
+          </Button>
+        </div>
+      </header>
+
+      <div className="board">
+        <Loader active={loading} size="big" />
+        {appData.map((column) => {
+          return (
+            <List
+              key={column.id}
+              deleteColumnButton={GetDeleteColumnButton(column.id)}
+              title={column.title}
+            >
+              {column.tasks.map((task) => {
+                return (
+                  <CustomCard
+                    handleActionForDeleteTaskButtton={() => {
+                      dispatch(deleteTaskAction(task.id));
+                    }}
+                    buttons={GetMoveButtonsForTask(task.id, column.id)}
+                    key={task.id}
+                    title={task.title}
+                    date={task.date}
+                    id={task.id}
+                    color={task.color}
+                    onChangeColor={(color: string) =>
+                      dispatch(changeTaskColorAction(task.id, color))
+                    }
+                  />
+                );
+              })}
+              <CreateTaskInput
+                onAddTask={(title: string) =>
+                  dispatch(createTaskAction(title, column.id))
+                }
+              />
+            </List>
+          );
+        })}
+        {<AddColumnButton />}
+      </div>
     </div>
   );
 }

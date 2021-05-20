@@ -37,7 +37,7 @@ export async function editTaskTitleRequest(
 
 export async function addTaskDeadlineRequest(
   taskId: number,
-  date: Moment
+  date: string
 ): Promise<void> {
   await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { date });
 }
@@ -77,6 +77,16 @@ export async function singUpRequest(
 }
 
 export async function singInRequest(
+  login: string,
+  password: string
+): Promise<AxiosResponse<User[]>> {
+  const userData = await axios.get(
+    urljoin(baseUrl, `users?login=${login}&password=${password}`)
+  );
+  return userData;
+}
+
+export async function loginCheckRequest(
   login: string
 ): Promise<AxiosResponse<User[]>> {
   const userData = await axios.get(urljoin(baseUrl, `users?login=${login}`));
