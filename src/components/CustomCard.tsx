@@ -113,8 +113,18 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
 
           <Button
             floated="right"
+            onClick={handleChangeEditableStatus}
+            className="edit-calendar__btn show-calendar__btn"
+            size="tiny"
+          >
+            <Icon name="edit"></Icon>
+          </Button>
+
+          <Button
+            floated="right"
             size="tiny"
             onClick={props.handleActionForDeleteTaskButtton}
+            className="trash-btn"
           >
             <Icon name="trash" />
           </Button>
@@ -147,16 +157,8 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
             options={colorOptions}
             onChange={handleChangeCardColor}
           />
+
           {props.buttons}
-        </div>
-        <div className="edit-calendar">
-          <Button
-            onClick={handleChangeEditableStatus}
-            className="edit-calendar__btn show-calendar__btn"
-            size="mini"
-          >
-            <Icon name="edit"></Icon>
-          </Button>
           <Button
             onClick={handleShowCalendar}
             className="edit-calendar__btn"

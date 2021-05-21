@@ -8,8 +8,10 @@ interface ListProps {
 const List: React.FC<ListProps> = (props: ListProps) => {
   return (
     <div className="list_item">
-      {props.deleteColumnButton}
-      <h1 className="list-item_title">{props.title}</h1>
+      <div className="list-item__header">
+        <h1 className="list-item_title">{props.title}</h1>
+        {props.deleteColumnButton}
+      </div>
       {props.children}
     </div>
   );

@@ -13,7 +13,14 @@ import {
   updateTaskColumnIdAction,
   changeTaskColorAction,
 } from "../redux/actions/inputAction";
-import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
+import {
+  Button,
+  Icon,
+  Input,
+  Loader,
+  Select,
+  SemanticCOLORS,
+} from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { Props } from "./SingUpForm";
 
@@ -43,33 +50,6 @@ export default function Board(props: Props): JSX.Element {
   }, [dispatch]);
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
-
-  const GetMoveButtonsForTask = (taskId: number, columnId: number) => {
-    return (
-      <div className="move-buttons-container">
-        {appData
-          .filter((column) => {
-            if (column.id !== columnId) {
-              return true;
-            }
-          })
-          .map((column) => {
-            return (
-              <Button
-                className="move-buttons-container__btn"
-                size="mini"
-                key={column.id}
-                onClick={() =>
-                  dispatch(updateTaskColumnIdAction(taskId, column.id))
-                }
-              >
-                {column.title}
-              </Button>
-            );
-          })}
-      </div>
-    );
-  };
 
   const AddColumnButton = (): JSX.Element => {
     return (
@@ -111,8 +91,9 @@ export default function Board(props: Props): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <header className="board-header">
+        <h1>My Todo App</h1>
         <div>
           <span className="logout">Hello,{userLoginFromLocalStorage}!</span>
           <Button size="mini" className="singout-btn" onClick={handleLogout}>
@@ -120,44 +101,58 @@ export default function Board(props: Props): JSX.Element {
           </Button>
         </div>
       </header>
-
-      <div className="board">
-        <Loader active={loading} size="big" />
-        {appData.map((column) => {
-          return (
-            <List
-              key={column.id}
-              deleteColumnButton={GetDeleteColumnButton(column.id)}
-              title={column.title}
-            >
-              {column.tasks.map((task) => {
-                return (
-                  <CustomCard
-                    handleActionForDeleteTaskButtton={() => {
-                      dispatch(deleteTaskAction(task.id));
-                    }}
-                    buttons={GetMoveButtonsForTask(task.id, column.id)}
-                    key={task.id}
-                    title={task.title}
-                    date={task.date}
-                    id={task.id}
-                    color={task.color}
-                    onChangeColor={(color: string) =>
-                      dispatch(changeTaskColorAction(task.id, color))
-                    }
-                  />
-                );
-              })}
-              <CreateTaskInput
-                onAddTask={(title: string) =>
-                  dispatch(createTaskAction(title, column.id))
-                }
-              />
-            </List>
-          );
-        })}
-        {<AddColumnButton />}
+      <div className="board-scrollable">
+        <div className="board">
+          <Loader active={loading} size="big" />
+          {appData.map((column) => {
+            return (
+              <List
+                key={column.id}
+                deleteColumnButton={GetDeleteColumnButton(column.id)}
+                title={column.title}
+              >
+                {column.tasks.map((task) => {
+                  return (
+                    <CustomCard
+                      handleActionForDeleteTaskButtton={() => {
+                        dispatch(deleteTaskAction(task.id));
+                      }}
+                      buttons={
+                        <Select
+                          onChange={(_, data: any) =>
+                            dispatch(
+                              updateTaskColumnIdAction(task.id, data.value)
+                            )
+                          }
+                          value={task.columnId}
+                          options={appData.map((column) => ({
+                            value: column.id,
+                            text: column.title,
+                          }))}
+                        />
+                      }
+                      key={task.id}
+                      title={task.title}
+                      date={task.date}
+                      id={task.id}
+                      color={task.color}
+                      onChangeColor={(color: string) =>
+                        dispatch(changeTaskColorAction(task.id, color))
+                      }
+                    />
+                  );
+                })}
+                <CreateTaskInput
+                  onAddTask={(title: string) =>
+                    dispatch(createTaskAction(title, column.id))
+                  }
+                />
+              </List>
+            );
+          })}
+          {<AddColumnButton />}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

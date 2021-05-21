@@ -2,22 +2,44 @@ $color1: #2c3e5d;
 $color2: #ccd6c9;
 $color3: #ebecf0;
 
+body {
+  overflow-x: unset;
+}
+
 .board-header {
+  position: fixed;
+  z-index: 10;
+  padding: 16px 24px;
   background-color: #66ddaa;
-  border-radius: 8px;
   min-width: 100%;
-  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    color: white;
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+}
+
+.board-scrollable {
+  padding-top: 80px;
+  height: 100vh;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: auto;
+  background-color: $color2;
 }
 
 .board {
   display: inline-flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   min-height: 550px;
   padding: 10px;
   border-radius: 8px;
   min-width: 100%;
-  overflow: auto;
-  background-color: $color2;
+  border-radius: 8px;
   .board_title {
     display: flex;
     justify-content: center;
@@ -38,18 +60,20 @@ $color3: #ebecf0;
   border-radius: 4px;
   background-color: $color3;
   margin: 0 5px;
+  .list-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .list-item_title {
     color: $color1;
     font-size: 22px;
+    margin-bottom: 0;
   }
 }
 
 .custom-card {
   padding: 14px;
-}
-
-.delete_column_btn {
-  float: right;
 }
 
 .move-buttons-container {
@@ -82,8 +106,8 @@ $color3: #ebecf0;
   margin: 0;
 }
 
-.trash.icon {
-  margin: 0;
+.trash-btn {
+  margin-right: 8px !important;
   padding: 0;
 }
 
@@ -114,12 +138,16 @@ $color3: #ebecf0;
   padding: 10px;
 }
 
-.edit-calendar {
-  display: flex;
-  justify-content: space-between;
-}
+// .edit-calendar {
+//   display: flex;
+//   justify-content: space-between;
+// }
 
 .logout {
   margin: 5px;
   font-size: 1.2em;
+}
+
+.delete_column_btn {
+  float: right;
 }
