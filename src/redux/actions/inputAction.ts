@@ -13,7 +13,7 @@ import getData, {
 } from "../../api";
 import { Column } from "../../components/Board";
 import { ActionTypes } from "../constants";
-import { Moment } from "moment";
+import { resetTaskToDeleteAction } from "./deletionAction";
 
 interface SetAppDataAction {
   type: string;
@@ -59,6 +59,7 @@ export const deleteTaskAction =
     try {
       await deleteTaskRequest(id);
       handleRequestSuccess(dispatch);
+      dispatch(resetTaskToDeleteAction());
     } catch (error) {
       toast.error(error.message);
     }

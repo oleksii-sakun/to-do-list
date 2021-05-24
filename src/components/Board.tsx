@@ -8,10 +8,10 @@ import {
   createColumnAction,
   createTaskAction,
   deleteColumnAction,
-  deleteTaskAction,
   getAppDataAction,
   updateTaskColumnIdAction,
   changeTaskColorAction,
+  deleteTaskAction,
 } from "../redux/actions/inputAction";
 import {
   Button,
@@ -23,6 +23,11 @@ import {
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { Props } from "./SingUpForm";
+import ModalComponent from "./Modal";
+import {
+  resetTaskToDeleteAction,
+  setTaskToDeleteAction,
+} from "../redux/actions/deletionAction";
 
 export interface Column {
   id: number;
@@ -90,10 +95,22 @@ export default function Board(props: Props): JSX.Element {
     props.history.push("/singIn");
   };
 
+  const handleCloseModal = () => {
+    dispatch(resetTaskToDeleteAction());
+  };
+
+  const handleConfirmModal = (taskId: number) => {
+    dispatch(deleteTaskAction(taskId));
+  };
+
   return (
     <>
       <header className="board-header">
         <h1>My Todo App</h1>
+        <ModalComponent
+          onClose={handleCloseModal}
+          onConfirm={handleConfirmModal}
+        />
         <div>
           <span className="logout">Hello,{userLoginFromLocalStorage}!</span>
           <Button size="mini" className="singout-btn" onClick={handleLogout}>
@@ -104,6 +121,7 @@ export default function Board(props: Props): JSX.Element {
       <div className="board-scrollable">
         <div className="board">
           <Loader active={loading} size="big" />
+
           {appData.map((column) => {
             return (
               <List
@@ -111,42 +129,44 @@ export default function Board(props: Props): JSX.Element {
                 deleteColumnButton={GetDeleteColumnButton(column.id)}
                 title={column.title}
               >
-                {column.tasks.map((task) => {
-                  return (
-                    <CustomCard
-                      handleActionForDeleteTaskButtton={() => {
-                        dispatch(deleteTaskAction(task.id));
-                      }}
-                      buttons={
-                        <Select
-                          onChange={(_, data: any) =>
-                            dispatch(
-                              updateTaskColumnIdAction(task.id, data.value)
-                            )
-                          }
-                          value={task.columnId}
-                          options={appData.map((column) => ({
-                            value: column.id,
-                            text: column.title,
-                          }))}
-                        />
-                      }
-                      key={task.id}
-                      title={task.title}
-                      date={task.date}
-                      id={task.id}
-                      color={task.color}
-                      onChangeColor={(color: string) =>
-                        dispatch(changeTaskColorAction(task.id, color))
-                      }
-                    />
-                  );
-                })}
                 <CreateTaskInput
                   onAddTask={(title: string) =>
                     dispatch(createTaskAction(title, column.id))
                   }
                 />
+                {column.tasks.map((task) => {
+                  return (
+                    <>
+                      <CustomCard
+                        handleActionForDeleteTaskButtton={() => {
+                          dispatch(setTaskToDeleteAction(task));
+                        }}
+                        buttons={
+                          <Select
+                            onChange={(_, data: any) =>
+                              dispatch(
+                                updateTaskColumnIdAction(task.id, data.value)
+                              )
+                            }
+                            value={task.columnId}
+                            options={appData.map((column) => ({
+                              value: column.id,
+                              text: column.title,
+                            }))}
+                          />
+                        }
+                        key={task.id}
+                        title={task.title}
+                        date={task.date}
+                        id={task.id}
+                        color={task.color}
+                        onChangeColor={(color: string) =>
+                          dispatch(changeTaskColorAction(task.id, color))
+                        }
+                      />
+                    </>
+                  );
+                })}
               </List>
             );
           })}
