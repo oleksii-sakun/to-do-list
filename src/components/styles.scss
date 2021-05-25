@@ -55,7 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  min-height: 500px;
+  min-height: 100px;
   padding: 10px 15px 10px 15px;
   border-radius: 4px;
   background-color: $color3;
@@ -75,15 +75,6 @@ body {
 .custom-card {
   padding: 14px;
 }
-
-// .move-buttons-container {
-//   display: flex;
-//   justify-content: flex-end;
-//   flex-wrap: wrap;
-//   &__btn {
-//     margin: 5px 0 5px 5px !important;
-//   }
-// }
 
 .content {
   overflow-wrap: break-word;
@@ -119,13 +110,6 @@ body {
   min-height: 15px;
 }
 
-// .custom-card__footer {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 5px 0 5px 0;
-// }
-
 .form_wrapper {
   position: fixed;
   top: 50%;
@@ -157,6 +141,10 @@ body {
   display: flex;
 }
 
-// .data-picker {
-//   position: absolute;
-// }
+.card-wrapper {
+  margin: 5px 0 5px 0 !important;
+}
+
+.create-task-btn {
+  margin: 8px 0 5px 0 !important;
+}

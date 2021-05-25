@@ -26,7 +26,7 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
   };
 
   return (
-    <Card color={props.color}>
+    <Card color={props.color} className="card-wrapper">
       <div className="custom-card">
         <Card.Content>
           <div style={{ width: 50 }}></div>

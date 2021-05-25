@@ -43,10 +43,10 @@ export const getAppDataAction =
   };
 
 export const createTaskAction =
-  (title: string, columnId: number) =>
+  (title: string, color: string, date: string, columnId: number) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
-      await createTaskRequest(title, columnId);
+      await createTaskRequest(title, color, date, columnId);
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);

@@ -3,7 +3,7 @@
     {
       "title": "модалка с дедлайн",
       "description": "",
-      "columnId": 2,
+      "columnId": 3,
       "color": "blue",
       "date": "26-05-2021",
       "id": 12
@@ -11,7 +11,7 @@
     {
       "title": "логин регистрация",
       "description": "",
-      "columnId": 2,
+      "columnId": 3,
       "color": "blue",
       "date": "25-05-2021",
       "id": 13
@@ -19,7 +19,7 @@
     {
       "title": "SAAS ",
       "description": "",
-      "color": "yellow",
+      "color": "blue",
       "date": "05-05-2021",
       "columnId": 3,
       "id": 17
@@ -254,6 +254,46 @@
       "color": "olive",
       "columnId": 3,
       "id": 48
+    },
+    {
+      "title": "test test11",
+      "description": "",
+      "color": "teal",
+      "date": "31-05-2021",
+      "columnId": 3,
+      "id": 49
+    },
+    {
+      "title": "write task title, please",
+      "description": "",
+      "color": "olive",
+      "date": "",
+      "columnId": 1,
+      "id": 50
+    },
+    {
+      "title": "write task title, please",
+      "description": "",
+      "color": "olive",
+      "date": "",
+      "columnId": 3,
+      "id": 51
+    },
+    {
+      "title": "svfd",
+      "description": "",
+      "color": "olive",
+      "date": "25-05-2021",
+      "columnId": 2,
+      "id": 53
+    },
+    {
+      "title": "test",
+      "description": "",
+      "color": "olive",
+      "date": "25-05-2021",
+      "columnId": 2,
+      "id": 54
     }
   ],
   "columns": [

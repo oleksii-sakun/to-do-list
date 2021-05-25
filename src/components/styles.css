@@ -50,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  min-height: 500px;
+  min-height: 100px;
   padding: 10px 15px 10px 15px;
   border-radius: 4px;
   background-color: #ebecf0;
@@ -135,6 +135,14 @@ body {
 
 .modal__edit-task {
   display: flex;
+}
+
+.card-wrapper {
+  margin: 5px 0 5px 0 !important;
+}
+
+.create-task-btn {
+  margin: 8px 0 5px 0 !important;
 }
 
 /*# sourceMappingURL=styles.css.map */

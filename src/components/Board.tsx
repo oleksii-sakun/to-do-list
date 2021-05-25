@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import CreateTaskInput from "./CreateTaskInput";
 import List from "./List";
 import CustomCard from "./CustomCard";
 import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createColumnAction,
-  createTaskAction,
   deleteColumnAction,
   getAppDataAction,
   changeTaskColorAction,
@@ -22,6 +20,7 @@ import {
 } from "../redux/actions/deletionAction";
 import EditTaskModal from "./EditTaskModal";
 import { resetTaskToEditAction } from "../redux/actions/editTaskActions";
+import CreateTaskModal from "./CreateTaskModal";
 
 export interface Column {
   id: number;
@@ -41,6 +40,7 @@ export interface Task {
 export default function Board(props: Props): JSX.Element {
   const dispatch = useDispatch();
 
+  const [createModalStatus, setCreateModalStatus] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -102,10 +102,25 @@ export default function Board(props: Props): JSX.Element {
     dispatch(resetTaskToEditAction());
   };
 
+  const handleCreateTaskModal = () => {
+    setCreateModalStatus(true);
+  };
+
+  const handleCloseCreateTaskModal = () => {
+    setCreateModalStatus(false);
+  };
+
   return (
     <>
       <header className="board-header">
         <h1>My Todo App</h1>
+        <div>
+          <CreateTaskModal
+            columns={appData}
+            isOpen={createModalStatus}
+            onClose={handleCloseCreateTaskModal}
+          />
+        </div>
         <div>
           {!!taskToEdit && (
             <EditTaskModal
@@ -133,37 +148,38 @@ export default function Board(props: Props): JSX.Element {
 
           {appData.map((column) => {
             return (
-              <List
-                key={column.id}
-                deleteColumnButton={GetDeleteColumnButton(column.id)}
-                title={column.title}
-              >
-                <CreateTaskInput
-                  onAddTask={(title: string) =>
-                    dispatch(createTaskAction(title, column.id))
-                  }
-                />
-                {column.tasks.map((task) => {
-                  return (
-                    <>
-                      <CustomCard
-                        handleActionForDeleteTaskButtton={() => {
-                          dispatch(setTaskToDeleteAction(task));
-                        }}
-                        task={task}
-                        key={task.id}
-                        title={task.title}
-                        date={task.date}
-                        id={task.id}
-                        color={task.color}
-                        onChangeColor={(color: string) =>
-                          dispatch(changeTaskColorAction(task.id, color))
-                        }
-                      />
-                    </>
-                  );
-                })}
-              </List>
+              <div key={column.id}>
+                <List
+                  deleteColumnButton={GetDeleteColumnButton(column.id)}
+                  title={column.title}
+                >
+                  <Button
+                    className="create-task-btn"
+                    onClick={handleCreateTaskModal}
+                  >
+                    Create task
+                  </Button>
+                  {column.tasks.map((task) => {
+                    return (
+                      <div key={task.id}>
+                        <CustomCard
+                          handleActionForDeleteTaskButtton={() => {
+                            dispatch(setTaskToDeleteAction(task));
+                          }}
+                          task={task}
+                          title={task.title}
+                          date={task.date}
+                          id={task.id}
+                          color={task.color}
+                          onChangeColor={(color: string) =>
+                            dispatch(changeTaskColorAction(task.id, color))
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </List>
+              </div>
             );
           })}
           {<AddColumnButton />}

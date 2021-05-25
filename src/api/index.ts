@@ -43,12 +43,15 @@ export async function addTaskDeadlineRequest(
 
 export async function createTaskRequest(
   title: string,
+  color: string,
+  date: string,
   columnId: number
 ): Promise<void> {
   await axios.post(urljoin(baseUrl, "tasks"), {
     title,
     description: "",
-    color: "olive",
+    color,
+    date,
     columnId,
   });
 }
