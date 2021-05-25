@@ -1,26 +1,26 @@
 {
   "tasks": [
     {
-      "title": "модалка с дедлайном",
+      "title": "модалка с дедлайн",
       "description": "",
-      "columnId": 1,
-      "color": "red",
-      "date": "20-05-2021",
+      "columnId": 2,
+      "color": "blue",
+      "date": "26-05-2021",
       "id": 12
     },
     {
       "title": "логин регистрация",
       "description": "",
       "columnId": 2,
-      "color": "red",
-      "date": "19-05-2021",
+      "color": "blue",
+      "date": "25-05-2021",
       "id": 13
     },
     {
-      "title": "SAAS",
+      "title": "SAAS ",
       "description": "",
-      "color": "green",
-      "date": "18-05-2021",
+      "color": "yellow",
+      "date": "05-05-2021",
       "columnId": 3,
       "id": 17
     },
@@ -35,7 +35,7 @@
     {
       "title": "JWT",
       "description": "",
-      "color": "#FFFFFF",
+      "color": "olive",
       "date": "20-05-2021",
       "columnId": 1,
       "id": 19
@@ -43,7 +43,7 @@
     {
       "title": "youtube JWT",
       "description": "",
-      "color": "green",
+      "color": "olive",
       "date": "20-05-2021",
       "columnId": 1,
       "id": 20
@@ -92,7 +92,7 @@
       "title": "cookie",
       "description": "",
       "color": "green",
-      "date": "20-05-2021",
+      "date": "25-05-2021",
       "columnId": 3,
       "id": 26
     },
@@ -235,22 +235,24 @@
     {
       "title": "модалка на удаление",
       "description": "",
-      "color": "#FFFFFF",
-      "columnId": 2,
-      "id": 46
+      "color": "olive",
+      "columnId": 3,
+      "id": 46,
+      "date": "23-05-2021"
     },
     {
       "title": "селектом кнопки",
       "description": "",
-      "color": "#FFFFFF",
-      "columnId": 2,
-      "id": 47
+      "color": "olive",
+      "columnId": 3,
+      "id": 47,
+      "date": "31-05-2021"
     },
     {
       "title": "элементы в правом нижнем углу",
       "description": "",
-      "color": "#FFFFFF",
-      "columnId": 2,
+      "color": "olive",
+      "columnId": 3,
       "id": 48
     }
   ],

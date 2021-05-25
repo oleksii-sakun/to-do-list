@@ -1,11 +1,10 @@
 import { debounce } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
-import { loginCheckRequest, singInRequest } from "../api";
+import { loginCheckRequest } from "../api";
 import { singUpAction } from "../redux/actions/autorizationAction";
 
 export interface Props {

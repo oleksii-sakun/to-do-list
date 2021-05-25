@@ -76,14 +76,14 @@ body {
   padding: 14px;
 }
 
-.move-buttons-container {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  &__btn {
-    margin: 5px 0 5px 5px !important;
-  }
-}
+// .move-buttons-container {
+//   display: flex;
+//   justify-content: flex-end;
+//   flex-wrap: wrap;
+//   &__btn {
+//     margin: 5px 0 5px 5px !important;
+//   }
+// }
 
 .content {
   overflow-wrap: break-word;
@@ -119,12 +119,12 @@ body {
   min-height: 15px;
 }
 
-.custom-card__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0 5px 0;
-}
+// .custom-card__footer {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 5px 0 5px 0;
+// }
 
 .form_wrapper {
   position: fixed;
@@ -138,11 +138,6 @@ body {
   padding: 10px;
 }
 
-// .edit-calendar {
-//   display: flex;
-//   justify-content: space-between;
-// }
-
 .logout {
   margin: 5px;
   font-size: 1.2em;
@@ -151,3 +146,17 @@ body {
 .delete_column_btn {
   float: right;
 }
+
+.modal-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal__edit-task {
+  display: flex;
+}
+
+// .data-picker {
+//   position: absolute;
+// }

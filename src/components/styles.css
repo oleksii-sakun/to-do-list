@@ -71,15 +71,6 @@ body {
   padding: 14px;
 }
 
-.move-buttons-container {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-.move-buttons-container__btn {
-  margin: 5px 0 5px 5px !important;
-}
-
 .content {
   overflow-wrap: break-word;
 }
@@ -115,13 +106,6 @@ body {
   min-height: 15px;
 }
 
-.custom-card__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0 5px 0;
-}
-
 .form_wrapper {
   position: fixed;
   top: 50%;
@@ -141,6 +125,16 @@ body {
 
 .delete_column_btn {
   float: right;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal__edit-task {
+  display: flex;
 }
 
 /*# sourceMappingURL=styles.css.map */

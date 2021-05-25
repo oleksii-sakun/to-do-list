@@ -9,25 +9,19 @@ import {
   createTaskAction,
   deleteColumnAction,
   getAppDataAction,
-  updateTaskColumnIdAction,
   changeTaskColorAction,
   deleteTaskAction,
 } from "../redux/actions/inputAction";
-import {
-  Button,
-  Icon,
-  Input,
-  Loader,
-  Select,
-  SemanticCOLORS,
-} from "semantic-ui-react";
+import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { Props } from "./SingUpForm";
-import ModalComponent from "./Modal";
+import ModalComponent from "./DeleteModal";
 import {
   resetTaskToDeleteAction,
   setTaskToDeleteAction,
 } from "../redux/actions/deletionAction";
+import EditTaskModal from "./EditTaskModal";
+import { resetTaskToEditAction } from "../redux/actions/editTaskActions";
 
 export interface Column {
   id: number;
@@ -55,6 +49,7 @@ export default function Board(props: Props): JSX.Element {
   }, [dispatch]);
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
+  const taskToEdit = useSelector((store: any) => store.taskToEdit);
 
   const AddColumnButton = (): JSX.Element => {
     return (
@@ -103,10 +98,24 @@ export default function Board(props: Props): JSX.Element {
     dispatch(deleteTaskAction(taskId));
   };
 
+  const handleCloseEditTaskModal = () => {
+    dispatch(resetTaskToEditAction());
+  };
+
   return (
     <>
       <header className="board-header">
         <h1>My Todo App</h1>
+        <div>
+          {!!taskToEdit && (
+            <EditTaskModal
+              onClose={handleCloseEditTaskModal}
+              taskToEdit={taskToEdit}
+              columns={appData}
+            />
+          )}
+        </div>
+
         <ModalComponent
           onClose={handleCloseModal}
           onConfirm={handleConfirmModal}
@@ -141,20 +150,7 @@ export default function Board(props: Props): JSX.Element {
                         handleActionForDeleteTaskButtton={() => {
                           dispatch(setTaskToDeleteAction(task));
                         }}
-                        buttons={
-                          <Select
-                            onChange={(_, data: any) =>
-                              dispatch(
-                                updateTaskColumnIdAction(task.id, data.value)
-                              )
-                            }
-                            value={task.columnId}
-                            options={appData.map((column) => ({
-                              value: column.id,
-                              text: column.title,
-                            }))}
-                          />
-                        }
+                        task={task}
                         key={task.id}
                         title={task.title}
                         date={task.date}

@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import urljoin from "url-join";
 import { Column } from "../components/Board";
-import { Moment } from "moment";
 
 export interface User {
   login: string;
@@ -49,7 +48,7 @@ export async function createTaskRequest(
   await axios.post(urljoin(baseUrl, "tasks"), {
     title,
     description: "",
-    color: "#FFFFFF",
+    color: "olive",
     columnId,
   });
 }

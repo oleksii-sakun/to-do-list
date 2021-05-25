@@ -13,6 +13,6 @@ export const setTaskToDeleteAction = (
   payload: task,
 });
 
-export const resetTaskToDeleteAction = () => ({
+export const resetTaskToDeleteAction = (): { type: ActionTypes } => ({
   type: ActionTypes.RESET_TASK_TO_DELETE,
 });
