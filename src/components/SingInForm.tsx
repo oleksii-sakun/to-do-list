@@ -26,14 +26,14 @@ export default function SingInForm(props: Props): JSX.Element {
 
   const handleLoginChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value: any }
   ) => {
     setUserLogin(data.value);
   };
 
   const handlePasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value: any }
   ) => {
     setUserPassword(data.value);
   };

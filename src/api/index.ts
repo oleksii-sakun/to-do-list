@@ -20,27 +20,6 @@ export async function deleteTaskRequest(id: number): Promise<void> {
   await axios.delete(urljoin(baseUrl, "tasks", id.toString()));
 }
 
-export async function changeTaskColumnIdRequest(
-  taskId: number,
-  columnId: number
-): Promise<void> {
-  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { columnId });
-}
-
-export async function editTaskTitleRequest(
-  taskId: number,
-  title: string
-): Promise<void> {
-  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { title });
-}
-
-export async function addTaskDeadlineRequest(
-  taskId: number,
-  date: string
-): Promise<void> {
-  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { date });
-}
-
 export async function createTaskRequest(
   title: string,
   color: string,
@@ -48,6 +27,22 @@ export async function createTaskRequest(
   columnId: number
 ): Promise<void> {
   await axios.post(urljoin(baseUrl, "tasks"), {
+    title,
+    description: "",
+    color,
+    date,
+    columnId,
+  });
+}
+
+export async function updateTaskRequest(
+  id: number,
+  title: string,
+  color: string,
+  date: string,
+  columnId: number
+): Promise<void> {
+  await axios.patch(urljoin(baseUrl, "tasks", id.toString()), {
     title,
     description: "",
     color,
@@ -69,13 +64,6 @@ export async function editColumnTitleRequest(
   title: string
 ): Promise<void> {
   await axios.patch(urljoin(baseUrl, "columns", id.toString()), { title });
-}
-
-export async function changeTaskColorRequest(
-  taskId: number,
-  color: string
-): Promise<void> {
-  await axios.patch(urljoin(baseUrl, "tasks", taskId.toString()), { color });
 }
 
 export async function singUpRequest(

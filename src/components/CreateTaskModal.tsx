@@ -29,34 +29,30 @@ export default function CreateTaskModal(
   const [taskColumnId, setTaskColumnId] = useState(1);
   const [cardColor, setCardColor] = useState("olive");
 
+  const dateFormat = "DD-MM-YYYY";
+
   const colorOptions = [
     {
-      key: "yellow",
       value: "yellow",
       text: <ColorItem color="#CEFF00" />,
     },
     {
-      key: "blue",
       value: "blue",
       text: <ColorItem color="#0048BA" />,
     },
     {
-      key: "green",
       value: "green",
       text: <ColorItem color="#00FF00" />,
     },
     {
-      key: "red",
       value: "red",
       text: <ColorItem color="#FF0800" />,
     },
     {
-      key: "teal",
       value: "teal",
       text: <ColorItem color="#008080" />,
     },
     {
-      key: "olive",
       value: "olive",
       text: <ColorItem color="#808000" />,
     },
@@ -64,21 +60,21 @@ export default function CreateTaskModal(
 
   const handleChangeCardColor = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value?: any }
   ) => {
     setCardColor(data.value);
   };
 
   const handleChangeTaskTitile = (
     _event: React.ChangeEvent<HTMLInputElement>,
-    data: any
+    data: { value?: any }
   ) => {
     setEditInputValue(data.value);
   };
-  const now = moment().format("DD-MM-YYYY").toString();
+  const dateNow = moment().format(dateFormat).toString();
 
   const handleDateSelect = (date: Moment) => {
-    setDateDeadeline(date.format("DD-MM-YYYY").toString());
+    setDateDeadeline(date.format(dateFormat).toString());
   };
 
   const handleSaveModal = () => {
@@ -87,7 +83,7 @@ export default function CreateTaskModal(
         createTaskAction(
           inputValue,
           cardColor,
-          dateDeadline || now,
+          dateDeadline || dateNow,
           taskColumnId
         )
       );
@@ -115,7 +111,9 @@ export default function CreateTaskModal(
         <Modal.Content>
           <div>
             <Select
-              onChange={(_, data: any) => setTaskColumnId(data.value)}
+              onChange={(_, data: { value?: any }) =>
+                setTaskColumnId(data.value)
+              }
               value={taskColumnId}
               options={props.columns.map((column) => ({
                 value: column.id,

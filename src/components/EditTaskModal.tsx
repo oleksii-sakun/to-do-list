@@ -3,17 +3,10 @@ import { DatePicker } from "antd";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Input, Modal, Select } from "semantic-ui-react";
-import {
-  addTaskDedalineAction,
-  changeTaskColorAction,
-  editTaskTitleAction,
-  getAppDataAction,
-  updateTaskColumnIdAction,
-} from "../redux/actions/inputAction";
 import { Column, Task } from "./Board";
 import { Moment } from "moment";
 import { ColorItem } from "./ColorItem";
-import { resetTaskToEditAction } from "../redux/actions/editTaskActions";
+import { updateTaskAction } from "../redux/actions/editTaskActions";
 import moment from "moment";
 
 interface EditTaskModalInterface {
@@ -36,62 +29,60 @@ export default function EditTaskModal(
 
   const colorOptions = [
     {
-      key: "yellow",
       value: "yellow",
       text: <ColorItem color="#CEFF00" />,
     },
     {
-      key: "blue",
       value: "blue",
       text: <ColorItem color="#0048BA" />,
     },
     {
-      key: "green",
       value: "green",
       text: <ColorItem color="#00FF00" />,
     },
     {
-      key: "red",
       value: "red",
       text: <ColorItem color="#FF0800" />,
     },
     {
-      key: "teal",
       value: "teal",
       text: <ColorItem color="#008080" />,
     },
     {
-      key: "olive",
       value: "olive",
       text: <ColorItem color="#808000" />,
     },
   ];
+  const dateFormat = "DD-MM-YYYY";
 
   const handleChangeCardColor = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value?: any }
   ) => {
     setCardColor(data.value);
   };
 
   const handleChangeTaskTitile = (
     _event: React.ChangeEvent<HTMLInputElement>,
-    data: any
+    data: { value?: any }
   ) => {
     setEditInputValue(data.value);
   };
 
   const handleDateSelect = (date: Moment) => {
-    setDateDeadeline(date.format("DD-MM-YYYY").toString());
+    setDateDeadeline(date.format(dateFormat).toString());
   };
 
   const handleSaveModal = () => {
-    dispatch(editTaskTitleAction(taskToEdit.id, inputValue));
-    dispatch(addTaskDedalineAction(taskToEdit.id, dateDeadline));
-    dispatch(updateTaskColumnIdAction(taskToEdit.id, taskColumnId));
-    dispatch(changeTaskColorAction(taskToEdit.id, cardColor));
-    dispatch(getAppDataAction());
-    dispatch(resetTaskToEditAction());
+    dispatch(
+      updateTaskAction(
+        taskToEdit.id,
+        inputValue,
+        cardColor,
+        dateDeadline,
+        taskColumnId
+      )
+    );
   };
 
   return (
@@ -106,7 +97,9 @@ export default function EditTaskModal(
         <Modal.Content>
           <div>
             <Select
-              onChange={(_, data: any) => setTaskColumnId(data.value)}
+              onChange={(_, data: { value?: any }) =>
+                setTaskColumnId(data.value)
+              }
               value={taskColumnId}
               options={props.columns.map((column) => ({
                 value: column.id,
@@ -121,7 +114,7 @@ export default function EditTaskModal(
               <DatePicker
                 className="data-picker"
                 onSelect={handleDateSelect}
-                defaultValue={moment(dateDeadline, "DD-MM-YYYY")}
+                defaultValue={moment(dateDeadline, dateFormat)}
               />
             </div>
           </div>

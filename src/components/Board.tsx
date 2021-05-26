@@ -7,7 +7,6 @@ import {
   createColumnAction,
   deleteColumnAction,
   getAppDataAction,
-  changeTaskColorAction,
   deleteTaskAction,
 } from "../redux/actions/inputAction";
 import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
@@ -178,9 +177,6 @@ export default function Board(props: Props): JSX.Element {
                           date={task.date}
                           id={task.id}
                           color={task.color}
-                          onChangeColor={(color: string) =>
-                            dispatch(changeTaskColorAction(task.id, color))
-                          }
                         />
                       </div>
                     );

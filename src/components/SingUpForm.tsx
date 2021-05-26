@@ -37,7 +37,7 @@ export default function SingUpForm(props: Props): JSX.Element {
 
   async function handleLoginChange(
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value: any }
   ) {
     const userData = await loginCheckRequest(data.value);
     const userDataFromDataBase = userData.data;
@@ -59,13 +59,13 @@ export default function SingUpForm(props: Props): JSX.Element {
 
   const handlePasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value: any }
   ) => {
     setUserPassword(data.value);
   };
   const handleRepeatPasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: any
+    data: { value: any }
   ) => {
     setUserRepeatPassword(data.value);
   };

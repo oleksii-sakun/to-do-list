@@ -2,15 +2,11 @@ import { Dispatch } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getData, {
-  addTaskDeadlineRequest,
-  changeTaskColorRequest,
-  changeTaskColumnIdRequest,
   createColumnRequest,
   createTaskRequest,
   deleteColumnRequest,
   deleteTaskRequest,
   editColumnTitleRequest,
-  editTaskTitleRequest,
 } from "../../api";
 import { Column } from "../../components/Board";
 import { ActionTypes } from "../constants";
@@ -66,39 +62,6 @@ export const deleteTaskAction =
     }
   };
 
-export const updateTaskColumnIdAction =
-  (taskId: number, columnId: number) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    try {
-      await changeTaskColumnIdRequest(taskId, columnId);
-      handleRequestSuccess(dispatch);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-export const editTaskTitleAction =
-  (taskId: number, title: string) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    try {
-      await editTaskTitleRequest(taskId, title);
-      handleRequestSuccess(dispatch);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-export const addTaskDedalineAction =
-  (taskId: number, date: string) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    try {
-      await addTaskDeadlineRequest(taskId, date);
-      handleRequestSuccess(dispatch);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
 export const createColumnAction =
   (title: string) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
@@ -126,17 +89,6 @@ export const editColumnTitleAction =
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await editColumnTitleRequest(id, title);
-      handleRequestSuccess(dispatch);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-export const changeTaskColorAction =
-  (id: number, color: string) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    try {
-      await changeTaskColorRequest(id, color);
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);

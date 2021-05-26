@@ -15,7 +15,6 @@ interface CustomCardProps {
   id: number;
   date: string;
   handleActionForDeleteTaskButtton: () => void;
-  onChangeColor: (color: string) => void;
 }
 
 export default function CustomCard(props: CustomCardProps): JSX.Element {
@@ -29,8 +28,6 @@ export default function CustomCard(props: CustomCardProps): JSX.Element {
     <Card color={props.color} className="card-wrapper">
       <div className="custom-card">
         <Card.Content>
-          <div style={{ width: 50 }}></div>
-
           <Button
             floated="right"
             onClick={handleEditTask}

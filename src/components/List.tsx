@@ -21,7 +21,7 @@ const List: React.FC<ListProps> = (props: ListProps) => {
 
   const handleEditColumnTitile = (
     _event: React.ChangeEvent<HTMLInputElement>,
-    data: any
+    data: { value?: any }
   ) => {
     setColumnTitle(data.value);
   };
