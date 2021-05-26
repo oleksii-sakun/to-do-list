@@ -272,28 +272,12 @@
       "id": 50
     },
     {
-      "title": "write task title, please",
+      "title": "write task title",
       "description": "",
       "color": "olive",
       "date": "",
       "columnId": 3,
       "id": 51
-    },
-    {
-      "title": "svfd",
-      "description": "",
-      "color": "olive",
-      "date": "25-05-2021",
-      "columnId": 2,
-      "id": 53
-    },
-    {
-      "title": "test",
-      "description": "",
-      "color": "olive",
-      "date": "25-05-2021",
-      "columnId": 2,
-      "id": 54
     }
   ],
   "columns": [
@@ -330,6 +314,11 @@
       "login": "kolya",
       "password": "1111",
       "id": 4
+    },
+    {
+      "login": "Vasya",
+      "password": "1111",
+      "id": 5
     }
   ]
 }

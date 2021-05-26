@@ -11,6 +11,7 @@ import {
 } from "../redux/actions/inputAction";
 import { Column } from "./Board";
 import { ColorItem } from "./ColorItem";
+import "semantic-ui-css/semantic.min.css";
 
 interface CreateTaskModalInterface {
   columns: Column[];

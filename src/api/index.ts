@@ -64,6 +64,13 @@ export async function deleteColumnRequest(id: number): Promise<void> {
   await axios.delete(urljoin(baseUrl, "columns", id.toString()));
 }
 
+export async function editColumnTitleRequest(
+  id: number,
+  title: string
+): Promise<void> {
+  await axios.patch(urljoin(baseUrl, "columns", id.toString()), { title });
+}
+
 export async function changeTaskColorRequest(
   taskId: number,
   color: string

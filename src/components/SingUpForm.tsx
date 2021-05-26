@@ -1,7 +1,6 @@
 import { debounce } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { loginCheckRequest } from "../api";
@@ -43,9 +42,6 @@ export default function SingUpForm(props: Props): JSX.Element {
     const userData = await loginCheckRequest(data.value);
     const userDataFromDataBase = userData.data;
     let userLoginFromDataBase;
-    // const isLoginInvalid = userData.data.some(
-    //   (user) => userLoginFromDataBase === user.login
-    // );
 
     userDataFromDataBase.forEach(
       (user) => (userLoginFromDataBase = user.login)
@@ -72,6 +68,10 @@ export default function SingUpForm(props: Props): JSX.Element {
     data: any
   ) => {
     setUserRepeatPassword(data.value);
+  };
+
+  const handleGoToSingInPage = () => {
+    props.history.push("/singIn");
   };
 
   return (
@@ -101,9 +101,7 @@ export default function SingUpForm(props: Props): JSX.Element {
         <Button disabled={disabled} type="submit" onClick={createUser}>
           Submit
         </Button>
-        <Button>
-          <Link to="/singIn">Already registered</Link>
-        </Button>
+        <Button onClick={handleGoToSingInPage}>Already registered</Button>
       </Form>
     </div>
   );

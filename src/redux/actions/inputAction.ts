@@ -9,6 +9,7 @@ import getData, {
   createTaskRequest,
   deleteColumnRequest,
   deleteTaskRequest,
+  editColumnTitleRequest,
   editTaskTitleRequest,
 } from "../../api";
 import { Column } from "../../components/Board";
@@ -114,6 +115,17 @@ export const deleteColumnAction =
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await deleteColumnRequest(id);
+      handleRequestSuccess(dispatch);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+export const editColumnTitleAction =
+  (id: number, title: string) =>
+  async (dispatch: Dispatch<unknown>): Promise<void> => {
+    try {
+      await editColumnTitleRequest(id, title);
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);

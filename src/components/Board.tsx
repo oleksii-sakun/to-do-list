@@ -42,6 +42,7 @@ export default function Board(props: Props): JSX.Element {
 
   const [createModalStatus, setCreateModalStatus] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [addColumnInputStatus, setAddColumnInputStatus] = useState(false);
 
   useEffect(() => {
     dispatch(getAppDataAction());
@@ -54,15 +55,26 @@ export default function Board(props: Props): JSX.Element {
   const AddColumnButton = (): JSX.Element => {
     return (
       <div>
-        <Input
-          size="mini"
-          placeholder="new column name"
-          onKeyPress={(event: { key: string; target: { value: string } }) => {
-            if (event.key === "Enter") {
-              dispatch(createColumnAction(event.target.value));
-            }
-          }}
-        ></Input>
+        {addColumnInputStatus ? (
+          <Input
+            size="mini"
+            placeholder="new column name"
+            onKeyPress={(event: { key: string; target: { value: string } }) => {
+              if (event.key === "Enter") {
+                dispatch(createColumnAction(event.target.value));
+                setAddColumnInputStatus(false);
+              }
+            }}
+          ></Input>
+        ) : (
+          <Button
+            className="add-column-btn"
+            size="small"
+            onClick={() => setAddColumnInputStatus(true)}
+          >
+            +Add new column
+          </Button>
+        )}
       </div>
     );
   };
@@ -152,13 +164,8 @@ export default function Board(props: Props): JSX.Element {
                 <List
                   deleteColumnButton={GetDeleteColumnButton(column.id)}
                   title={column.title}
+                  id={column.id}
                 >
-                  <Button
-                    className="create-task-btn"
-                    onClick={handleCreateTaskModal}
-                  >
-                    Create task
-                  </Button>
                   {column.tasks.map((task) => {
                     return (
                       <div key={task.id}>
@@ -178,6 +185,12 @@ export default function Board(props: Props): JSX.Element {
                       </div>
                     );
                   })}
+                  <Button
+                    className="create-task-btn"
+                    onClick={handleCreateTaskModal}
+                  >
+                    Create task
+                  </Button>
                 </List>
               </div>
             );

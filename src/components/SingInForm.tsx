@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { singInRequest } from "../api";
@@ -39,6 +38,10 @@ export default function SingInForm(props: Props): JSX.Element {
     setUserPassword(data.value);
   };
 
+  const handleReturnToSingUp = () => {
+    props.history.push("/");
+  };
+
   return (
     <div className="form_wrapper">
       <Form>
@@ -55,9 +58,7 @@ export default function SingInForm(props: Props): JSX.Element {
         <Button type="submit" onClick={checkUserPassword}>
           Submit
         </Button>
-        <Button>
-          <Link to="/">Return to SingUpForm</Link>
-        </Button>
+        <Button onClick={handleReturnToSingUp}>Return to SingUpForm</Button>
       </Form>
     </div>
   );
