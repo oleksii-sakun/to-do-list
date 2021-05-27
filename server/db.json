@@ -165,7 +165,7 @@
       "description": "",
       "color": "green",
       "date": "20-05-2021",
-      "columnId": 1,
+      "columnId": 3,
       "id": 35
     },
     {
@@ -254,20 +254,44 @@
       "color": "olive",
       "columnId": 3,
       "id": 48
+    },
+    {
+      "title": "sddf",
+      "description": "",
+      "color": "olive",
+      "date": "26-05-2021",
+      "columnId": 5,
+      "id": 49
+    },
+    {
+      "title": "Beer",
+      "description": "",
+      "color": "red",
+      "date": "27-05-2021",
+      "columnId": 4,
+      "id": 50
     }
   ],
   "columns": [
     {
       "id": 1,
-      "title": "To Do"
+      "title": "To Do",
+      "userId": 1
     },
     {
       "id": 2,
-      "title": "In Progress"
+      "title": "In Progress",
+      "userId": 1
     },
     {
       "id": 3,
-      "title": "Done"
+      "title": "Done",
+      "userId": 1
+    },
+    {
+      "title": "To Drink",
+      "userId": 2,
+      "id": 4
     }
   ],
   "users": [
@@ -280,21 +304,6 @@
       "login": "Artur",
       "password": "12345678",
       "id": 2
-    },
-    {
-      "login": "vasya",
-      "password": "1111",
-      "id": 3
-    },
-    {
-      "login": "kolya",
-      "password": "1111",
-      "id": 4
-    },
-    {
-      "login": "Vasya",
-      "password": "1111",
-      "id": 5
     }
   ]
 }

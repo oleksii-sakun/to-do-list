@@ -1,39 +1,44 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormInput } from "semantic-ui-react";
-import { singInRequest } from "../api";
-import { setAutorizationStatusAction } from "../redux/actions/autorizationAction";
+import { singInAction } from "../redux/actions/autorizationAction";
 import { Props } from "./SingUpForm";
 
+export interface SelectData {
+  value?: any;
+}
+
 export default function SingInForm(props: Props): JSX.Element {
-  const dispatch = useDispatch();
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const isSinged = useSelector(
+    ({ authorization }: { authorization: boolean }) => authorization
+  );
+
+  useEffect(() => {
+    if (isSinged) {
+      props.history.push("/board");
+      console.log("redir");
+    }
+  }, [isSinged]);
 
   async function checkUserPassword() {
-    const userData = await singInRequest(userLogin, userPassword);
-
-    if (userData.data.length) {
-      dispatch(setAutorizationStatusAction());
-      localStorage.setItem("login", userLogin);
-      localStorage.setItem("password", userPassword);
-      props.history.push("/board");
-    } else {
-      toast.error("Your login or password is not correct");
-    }
+    dispatch(singInAction(userLogin, userPassword));
+    console.log("test");
   }
 
   const handleLoginChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value: any }
+    data: SelectData
   ) => {
     setUserLogin(data.value);
   };
 
   const handlePasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value: any }
+    data: SelectData
   ) => {
     setUserPassword(data.value);
   };

@@ -1,19 +1,20 @@
 import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import { loginCheckRequest, singInRequest, singUpRequest } from "../../api";
-import { ActionTypes } from "../constants";
-import { handleRequestSuccess } from "./inputAction";
+import { handleRequestSuccess } from "./boardActions";
 
+import { ActionTypes } from "../constants";
 interface SetAutorizationStatusAction {
   type: string;
   payload: boolean;
 }
 
-export const setAutorizationStatusAction = (): SetAutorizationStatusAction => ({
+export const setAutorizationStatusAction = (
+  payload: boolean
+): SetAutorizationStatusAction => ({
   type: ActionTypes.SET_AUTORIZATION_STATUS,
-  payload: true,
+  payload,
 });
-
 export const singUpAction =
   (login: string, password: string) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
@@ -26,11 +27,26 @@ export const singUpAction =
   };
 
 export const singInAction =
-  (login: string, password: string) =>
+  (login: string, password: string, toggleLoader?: (agr: boolean) => void) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
-      await singInRequest(login, password);
-      handleRequestSuccess(dispatch);
+      if (toggleLoader) {
+        toggleLoader(true);
+      }
+      const userData = await singInRequest(login, password);
+
+      if (userData.data.length) {
+        localStorage.setItem("login", login);
+        localStorage.setItem("password", password);
+        localStorage.setItem("userId", userData.data[0].id.toString());
+        handleRequestSuccess(dispatch);
+        dispatch(setAutorizationStatusAction(true));
+        if (toggleLoader) {
+          toggleLoader(false);
+        }
+      } else {
+        toast.error("Your login or password is not correct");
+      }
     } catch (error) {
       toast.error(error.message);
     }

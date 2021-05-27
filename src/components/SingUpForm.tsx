@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { loginCheckRequest } from "../api";
 import { singUpAction } from "../redux/actions/autorizationAction";
+import { SelectData } from "./SingInForm";
 
 export interface Props {
   history: {
@@ -37,35 +38,31 @@ export default function SingUpForm(props: Props): JSX.Element {
 
   async function handleLoginChange(
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value: any }
+    data: SelectData
   ) {
-    const userData = await loginCheckRequest(data.value);
-    const userDataFromDataBase = userData.data;
-    let userLoginFromDataBase;
+    const isLoginValid = await loginCheckRequest(data.value);
+    console.log(isLoginValid);
 
-    userDataFromDataBase.forEach(
-      (user) => (userLoginFromDataBase = user.login)
-    );
-    if (userLoginFromDataBase) {
-      setInputColor(true);
-      setSumbmitButton(true);
-      setUserLogin(data.value);
-    } else {
+    if (isLoginValid) {
       setInputColor(false);
       setUserLogin(data.value);
       setSumbmitButton(false);
+    } else {
+      setInputColor(true);
+      setSumbmitButton(true);
+      setUserLogin(data.value);
     }
   }
 
   const handlePasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value: any }
+    data: SelectData
   ) => {
     setUserPassword(data.value);
   };
   const handleRepeatPasswordChange = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value: any }
+    data: SelectData
   ) => {
     setUserRepeatPassword(data.value);
   };

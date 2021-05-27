@@ -8,6 +8,7 @@ import { Moment } from "moment";
 import { ColorItem } from "./ColorItem";
 import { updateTaskAction } from "../redux/actions/editTaskActions";
 import moment from "moment";
+import { SelectData } from "./SingInForm";
 
 interface EditTaskModalInterface {
   onClose: () => void;
@@ -15,17 +16,22 @@ interface EditTaskModalInterface {
   columns: Column[];
 }
 
+interface HandlerFunctionInterface {
+  event: React.SyntheticEvent<HTMLElement, Event>;
+  data: { value?: any };
+}
+
 export default function EditTaskModal(
   props: EditTaskModalInterface
 ): JSX.Element {
   const dispatch = useDispatch();
 
-  const taskToEdit = props.taskToEdit;
+  const { taskToEdit } = props;
 
-  const [inputValue, setEditInputValue] = useState(taskToEdit?.title);
-  const [dateDeadline, setDateDeadeline] = useState(taskToEdit?.date);
-  const [taskColumnId, setTaskColumnId] = useState(taskToEdit?.columnId);
-  const [cardColor, setCardColor] = useState(taskToEdit?.color);
+  const [inputValue, setEditInputValue] = useState(taskToEdit.title);
+  const [dateDeadline, setDateDeadeline] = useState(taskToEdit.date);
+  const [taskColumnId, setTaskColumnId] = useState(taskToEdit.columnId);
+  const [cardColor, setCardColor] = useState(taskToEdit.color);
 
   const colorOptions = [
     {
@@ -57,14 +63,14 @@ export default function EditTaskModal(
 
   const handleChangeCardColor = (
     _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: { value?: any }
+    data: SelectData
   ) => {
     setCardColor(data.value);
   };
 
   const handleChangeTaskTitile = (
     _event: React.ChangeEvent<HTMLInputElement>,
-    data: { value?: any }
+    data: SelectData
   ) => {
     setEditInputValue(data.value);
   };
@@ -75,13 +81,13 @@ export default function EditTaskModal(
 
   const handleSaveModal = () => {
     dispatch(
-      updateTaskAction(
-        taskToEdit.id,
-        inputValue,
-        cardColor,
-        dateDeadline,
-        taskColumnId
-      )
+      updateTaskAction({
+        id: taskToEdit.id,
+        title: inputValue,
+        color: cardColor,
+        date: dateDeadline,
+        columnId: taskColumnId,
+      })
     );
   };
 

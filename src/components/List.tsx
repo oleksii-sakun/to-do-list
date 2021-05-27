@@ -1,7 +1,8 @@
 import React, { ReactNode, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Icon, Input } from "semantic-ui-react";
-import { editColumnTitleAction } from "../redux/actions/inputAction";
+import { editColumnTitleAction } from "../redux/actions/boardActions";
+import { SelectData } from "./SingInForm";
 
 interface ListProps {
   deleteColumnButton: JSX.Element;
@@ -21,7 +22,7 @@ const List: React.FC<ListProps> = (props: ListProps) => {
 
   const handleEditColumnTitile = (
     _event: React.ChangeEvent<HTMLInputElement>,
-    data: { value?: any }
+    data: SelectData
   ) => {
     setColumnTitle(data.value);
   };
@@ -41,18 +42,16 @@ const List: React.FC<ListProps> = (props: ListProps) => {
             }}
           />
         ) : (
-          <>
-            <div className="list-item_title">
-              <h1>{props.title}</h1>
-              <Button
-                size="tiny"
-                onClick={handleEditInputStatusChange}
-                className="edit-column-btn"
-              >
-                <Icon name="edit"></Icon>
-              </Button>
-            </div>
-          </>
+          <div className="list-item_title">
+            <h1>{props.title}</h1>
+            <Button
+              size="tiny"
+              onClick={handleEditInputStatusChange}
+              className="edit-column-btn"
+            >
+              <Icon name="edit"></Icon>
+            </Button>
+          </div>
         )}
 
         {props.deleteColumnButton}

@@ -10,8 +10,10 @@ export interface User {
 
 const baseUrl = "http://localhost:3001";
 
-export default async function getData(): Promise<Column[]> {
-  const { data } = await axios.get(urljoin(baseUrl, "columns?_embed=tasks"));
+export default async function getData(userId: string): Promise<Column[]> {
+  const { data } = await axios.get(
+    urljoin(baseUrl, `columns?userId=${userId}&&_embed=tasks`)
+  );
 
   return data;
 }
@@ -52,7 +54,11 @@ export async function updateTaskRequest(
 }
 
 export async function createColumnRequest(title: string): Promise<void> {
-  await axios.post(urljoin(baseUrl, "columns"), { title });
+  const userId = localStorage.getItem("userId");
+  await axios.post(urljoin(baseUrl, "columns"), {
+    title,
+    userId: Number(userId),
+  });
 }
 
 export async function deleteColumnRequest(id: number): Promise<void> {
@@ -83,9 +89,9 @@ export async function singInRequest(
   return userData;
 }
 
-export async function loginCheckRequest(
-  login: string
-): Promise<AxiosResponse<User[]>> {
+export async function loginCheckRequest(login: string): Promise<boolean> {
   const userData = await axios.get(urljoin(baseUrl, `users?login=${login}`));
-  return userData;
+  console.log("userData", userData);
+
+  return !userData.data[0];
 }

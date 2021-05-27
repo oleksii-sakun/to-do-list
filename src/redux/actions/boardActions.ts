@@ -10,7 +10,7 @@ import getData, {
 } from "../../api";
 import { Column } from "../../components/Board";
 import { ActionTypes } from "../constants";
-import { resetTaskToDeleteAction } from "./deletionAction";
+import { resetTaskToDeleteAction } from "./deletionActions";
 
 interface SetAppDataAction {
   type: string;
@@ -26,7 +26,8 @@ export async function handleRequestSuccess(
   dispatch: Dispatch<unknown>
 ): Promise<void> {
   try {
-    const data = await getData();
+    const userId = localStorage.getItem("userId") as string;
+    const data = await getData(userId);
     dispatch(setAppDataAction(data));
   } catch (error) {
     toast.error(error.message);
@@ -40,10 +41,20 @@ export const getAppDataAction =
   };
 
 export const createTaskAction =
-  (title: string, color: string, date: string, columnId: number) =>
+  (createTaskActionArguments: {
+    title: string;
+    color: string;
+    date: string;
+    columnId: number;
+  }) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
-      await createTaskRequest(title, color, date, columnId);
+      await createTaskRequest(
+        createTaskActionArguments.title,
+        createTaskActionArguments.color,
+        createTaskActionArguments.date,
+        createTaskActionArguments.columnId
+      );
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);

@@ -6,7 +6,7 @@ import app from "./reducers/boardReducer";
 
 export default combineReducers({
   app,
-  autorization: autorizationReducer,
+  authorization: autorizationReducer,
   taskToDelete: deleteTaskReducer,
   taskToEdit: editTaskReducer,
 });

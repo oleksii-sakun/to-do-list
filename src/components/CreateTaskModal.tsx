@@ -8,7 +8,7 @@ import { Button, Input, Modal, Select } from "semantic-ui-react";
 import {
   createTaskAction,
   getAppDataAction,
-} from "../redux/actions/inputAction";
+} from "../redux/actions/boardActions";
 import { Column } from "./Board";
 import { ColorItem } from "./ColorItem";
 import "semantic-ui-css/semantic.min.css";
@@ -77,21 +77,20 @@ export default function CreateTaskModal(
     setDateDeadeline(date.format(dateFormat).toString());
   };
 
+  const createTaskActionArguments = {
+    title: inputValue,
+    color: cardColor,
+    date: dateDeadline || dateNow,
+    columnId: taskColumnId,
+  };
+
   const handleSaveModal = () => {
     if (inputValue) {
-      dispatch(
-        createTaskAction(
-          inputValue,
-          cardColor,
-          dateDeadline || dateNow,
-          taskColumnId
-        )
-      );
+      dispatch(createTaskAction(createTaskActionArguments));
       props.onClose();
     } else {
       toast.error("write your task title, please");
     }
-
     dispatch(getAppDataAction());
   };
 

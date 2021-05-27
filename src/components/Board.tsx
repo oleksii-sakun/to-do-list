@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createColumnAction,
   deleteColumnAction,
-  getAppDataAction,
   deleteTaskAction,
-} from "../redux/actions/inputAction";
+} from "../redux/actions/boardActions";
 import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { Props } from "./SingUpForm";
@@ -16,10 +15,11 @@ import ModalComponent from "./DeleteModal";
 import {
   resetTaskToDeleteAction,
   setTaskToDeleteAction,
-} from "../redux/actions/deletionAction";
+} from "../redux/actions/deletionActions";
 import EditTaskModal from "./EditTaskModal";
 import { resetTaskToEditAction } from "../redux/actions/editTaskActions";
 import CreateTaskModal from "./CreateTaskModal";
+import { setAutorizationStatusAction } from "../redux/actions/autorizationAction";
 
 export interface Column {
   id: number;
@@ -40,13 +40,8 @@ export default function Board(props: Props): JSX.Element {
   const dispatch = useDispatch();
 
   const [createModalStatus, setCreateModalStatus] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [addColumnInputStatus, setAddColumnInputStatus] = useState(false);
 
-  useEffect(() => {
-    dispatch(getAppDataAction());
-    setTimeout(() => setLoading(false), 50);
-  }, [dispatch]);
+  const [addColumnInputStatus, setAddColumnInputStatus] = useState(false);
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
   const taskToEdit = useSelector((store: any) => store.taskToEdit);
@@ -98,6 +93,8 @@ export default function Board(props: Props): JSX.Element {
   const handleLogout = () => {
     localStorage.removeItem("login");
     localStorage.removeItem("password");
+    localStorage.removeItem("userId");
+    dispatch(setAutorizationStatusAction(false));
     props.history.push("/singIn");
   };
 
@@ -155,8 +152,6 @@ export default function Board(props: Props): JSX.Element {
       </header>
       <div className="board-scrollable">
         <div className="board">
-          <Loader active={loading} size="big" />
-
           {appData.map((column) => {
             return (
               <div key={column.id}>

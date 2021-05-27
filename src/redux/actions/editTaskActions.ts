@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { updateTaskRequest } from "../../api";
 import { Task } from "../../components/Board";
 import { ActionTypes } from "../constants";
-import { getAppDataAction, handleRequestSuccess } from "./inputAction";
+import { getAppDataAction, handleRequestSuccess } from "./boardActions";
 
 interface setTaskToEditActionInterface {
   type: string;
@@ -22,10 +22,22 @@ export const resetTaskToEditAction = (): { type: ActionTypes } => ({
 });
 
 export const updateTaskAction =
-  (id: number, title: string, color: string, date: string, columnId: number) =>
+  (updateTaskActionArguments: {
+    id: number;
+    title: string;
+    color: string;
+    date: string;
+    columnId: number;
+  }) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
-      await updateTaskRequest(id, title, color, date, columnId);
+      await updateTaskRequest(
+        updateTaskActionArguments.id,
+        updateTaskActionArguments.title,
+        updateTaskActionArguments.color,
+        updateTaskActionArguments.date,
+        updateTaskActionArguments.columnId
+      );
       handleRequestSuccess(dispatch);
       dispatch(getAppDataAction());
       dispatch(resetTaskToEditAction());
