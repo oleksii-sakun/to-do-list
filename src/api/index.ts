@@ -8,7 +8,7 @@ export interface User {
   id: number;
 }
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "https://todolistalexsakun.herokuapp.com/api";
 
 export default async function getData(userId: string): Promise<Column[]> {
   const { data } = await axios.get(

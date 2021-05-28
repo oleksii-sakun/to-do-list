@@ -1,4 +1,5 @@
 import { create, router as _router, defaults, rewriter } from "json-server";
+const jsonServer = require("json-server");
 import process from "node:process";
 const server = create();
 const router = _router("./db.json");
