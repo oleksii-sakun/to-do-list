@@ -1,20 +1,59 @@
-import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
 import Board from "./components/Board";
-import store from "./redux/store";
 import "react-toastify/dist/ReactToastify.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute";
+import SingInForm from "./components/SingInForm";
+import SingUpForm, { Props } from "./components/SingUpForm";
+import { Loader } from "semantic-ui-react";
+import { singInAction } from "./redux/actions/authorizationAction";
+import { useDispatch, useSelector } from "react-redux";
 
-function App(): JSX.Element {
+function App(props: Props): JSX.Element {
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
+
+  const isSinged = useSelector(
+    ({ authorization }: { authorization: boolean }) => authorization
+  );
+
+  useEffect(() => {
+    if (isSinged) {
+      props.history.push("/board");
+    } else {
+      props.history.push("/singIn");
+    }
+  }, [isSinged]);
+
+  useEffect(() => {
+    const login = localStorage.getItem("login");
+    const password = localStorage.getItem("password");
+
+    if (login && password) {
+      dispatch(singInAction(login, password, setLoader));
+    }
+  }, []);
+
+  if (loader) {
+    return <Loader active size="big" />;
+  }
+
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Board></Board>
-        <ToastContainer></ToastContainer>
-      </div>
-    </Provider>
+    <div className="App">
+      <ToastContainer></ToastContainer>
+      <Switch>
+        <Route exact path="/singIn" component={SingInForm} />
+        <Route exact path="/" component={SingUpForm} />
+        <PrivateRoute
+          exact
+          path="/board"
+          component={Board}
+          isSinged={isSinged}
+        />
+      </Switch>
+    </div>
   );
 }
 
-export default App;
+export default withRouter(App);

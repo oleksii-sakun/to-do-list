@@ -2,15 +2,15 @@ import { Dispatch } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import getData, {
-  changeTaskColorRequest,
-  changeTaskColumnIdRequest,
   createColumnRequest,
   createTaskRequest,
   deleteColumnRequest,
   deleteTaskRequest,
+  editColumnTitleRequest,
 } from "../../api";
 import { Column } from "../../components/Board";
-import { SET_APP_DATA } from "../constants";
+import { ActionTypes } from "../constants";
+import { resetTaskToDeleteAction } from "./deletionActions";
 
 interface SetAppDataAction {
   type: string;
@@ -18,13 +18,16 @@ interface SetAppDataAction {
 }
 
 export const setAppDataAction = (payload: Column[]): SetAppDataAction => ({
-  type: SET_APP_DATA,
+  type: ActionTypes.SET_APP_DATA,
   payload,
 });
 
-async function handleRequestSuccess(dispatch: Dispatch<unknown>) {
+export async function handleRequestSuccess(
+  dispatch: Dispatch<unknown>
+): Promise<void> {
   try {
-    const data = await getData();
+    const userId = localStorage.getItem("userId") as string;
+    const data = await getData(userId);
     dispatch(setAppDataAction(data));
   } catch (error) {
     toast.error(error.message);
@@ -38,10 +41,20 @@ export const getAppDataAction =
   };
 
 export const createTaskAction =
-  (title: string, columnId: number) =>
+  (createTaskActionArguments: {
+    title: string;
+    color: string;
+    date: string;
+    columnId: number;
+  }) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
-      await createTaskRequest(title, columnId);
+      await createTaskRequest(
+        createTaskActionArguments.title,
+        createTaskActionArguments.color,
+        createTaskActionArguments.date,
+        createTaskActionArguments.columnId
+      );
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);
@@ -54,17 +67,7 @@ export const deleteTaskAction =
     try {
       await deleteTaskRequest(id);
       handleRequestSuccess(dispatch);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-export const updateTaskColumnIdAction =
-  (taskId: number, columnId: number) =>
-  async (dispatch: Dispatch<unknown>): Promise<void> => {
-    try {
-      await changeTaskColumnIdRequest(taskId, columnId);
-      handleRequestSuccess(dispatch);
+      dispatch(resetTaskToDeleteAction());
     } catch (error) {
       toast.error(error.message);
     }
@@ -86,19 +89,17 @@ export const deleteColumnAction =
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
       await deleteColumnRequest(id);
-      await getData();
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);
     }
   };
 
-export const changeTaskColorAction =
-  (id: number, color: string) =>
+export const editColumnTitleAction =
+  (id: number, title: string) =>
   async (dispatch: Dispatch<unknown>): Promise<void> => {
     try {
-      await changeTaskColorRequest(id, color);
-      await getData();
+      await editColumnTitleRequest(id, title);
       handleRequestSuccess(dispatch);
     } catch (error) {
       toast.error(error.message);

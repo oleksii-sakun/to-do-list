@@ -1,58 +1,50 @@
 {
   "tasks": [
     {
-      "title": "выбор цвета",
+      "title": "модалка с дедлайн",
       "description": "",
       "columnId": 3,
-      "color": "yellow",
-      "id": 11
-    },
-    {
-      "title": "модалка с дедлайном",
-      "description": "",
-      "columnId": 1,
-      "color": "red",
+      "color": "blue",
+      "date": "31-05-2021",
       "id": 12
     },
     {
       "title": "логин регистрация",
       "description": "",
-      "columnId": 2,
-      "color": "red",
+      "columnId": 3,
+      "color": "blue",
+      "date": "25-05-2021",
       "id": 13
     },
     {
-      "title": "убрать текущую коллонку в перемещениии",
+      "title": "SAAS ",
       "description": "",
+      "color": "blue",
+      "date": "05-05-2021",
       "columnId": 3,
-      "color": "yellow",
-      "id": 14
-    },
-    {
-      "title": "SAAS",
-      "description": "",
-      "color": "green",
-      "columnId": 1,
       "id": 17
     },
     {
       "title": "БЭМ",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 18
     },
     {
       "title": "JWT",
       "description": "",
-      "color": "#FFFFFF",
+      "color": "olive",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 19
     },
     {
       "title": "youtube JWT",
       "description": "",
-      "color": "green",
+      "color": "olive",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 20
     },
@@ -60,6 +52,7 @@
       "title": "reduce",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 21
     },
@@ -67,6 +60,7 @@
       "title": "event loop",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 22
     },
@@ -74,6 +68,7 @@
       "title": "this",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 23
     },
@@ -81,6 +76,7 @@
       "title": "замыкания, рекурсия",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 24
     },
@@ -88,20 +84,23 @@
       "title": "  http  status code",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 25
     },
     {
       "title": "cookie",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "25-05-2021",
+      "columnId": 3,
       "id": 26
     },
     {
       "title": "debugger",
       "description": "",
       "color": "green",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 27
     },
@@ -109,6 +108,7 @@
       "title": "всплытие",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 28
     },
@@ -116,6 +116,7 @@
       "title": "event bubbling",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 29
     },
@@ -123,6 +124,7 @@
       "title": "bind, call, apply",
       "description": "",
       "color": "green",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 30
     },
@@ -130,20 +132,23 @@
       "title": "DOM почитать",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 31
     },
     {
       "title": "Virtual DOM, Shadow DOM",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 32
     },
     {
       "title": "мемоизация",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 33
     },
@@ -151,6 +156,7 @@
       "title": "GIT Reset, Head",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 34
     },
@@ -158,34 +164,39 @@
       "title": "XSS кроссайт скриптинг",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 35
     },
     {
       "title": "HTTPS",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 36
     },
     {
       "title": "pixel, em, rm",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 37
     },
     {
       "title": "JSX",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 38
     },
     {
       "title": "create Ref, use Ref",
       "description": "",
       "color": "green",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 39
     },
@@ -193,13 +204,15 @@
       "title": "pakage lock. json",
       "description": "",
       "color": "green",
-      "columnId": 1,
+      "date": "20-05-2021",
+      "columnId": 3,
       "id": 40
     },
     {
       "title": "ООП",
       "description": "",
       "color": "red",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 41
     },
@@ -207,6 +220,7 @@
       "title": "DRY",
       "description": "",
       "color": "green",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 42
     },
@@ -214,32 +228,74 @@
       "title": "kiss",
       "description": "",
       "color": "green",
+      "date": "20-05-2021",
       "columnId": 1,
       "id": 43
+    },
+    {
+      "title": "модалка на удаление",
+      "description": "",
+      "color": "olive",
+      "columnId": 3,
+      "id": 46,
+      "date": "23-05-2021"
+    },
+    {
+      "title": "селектом кнопки",
+      "description": "",
+      "color": "olive",
+      "columnId": 3,
+      "id": 47,
+      "date": "31-05-2021"
+    },
+    {
+      "title": "элементы в правом нижнем углу",
+      "description": "",
+      "color": "olive",
+      "columnId": 3,
+      "id": 48
+    },
+    {
+      "title": "Beer",
+      "description": "",
+      "color": "red",
+      "date": "27-05-2021",
+      "columnId": 4,
+      "id": 50
     }
   ],
   "columns": [
     {
       "id": 1,
-      "title": "To Do"
+      "title": "To Do",
+      "userId": 1
     },
     {
       "id": 2,
-      "title": "In Progress"
+      "title": "In Progress",
+      "userId": 1
     },
     {
       "id": 3,
-      "title": "Done"
+      "title": "Done",
+      "userId": 1
+    },
+    {
+      "title": "To Drink",
+      "userId": 2,
+      "id": 4
     }
   ],
   "users": [
     {
       "login": "Alex",
-      "password": "34573457"
+      "password": "11111111",
+      "id": 1
     },
     {
       "login": "Artur",
-      "password": "12345678"
+      "password": "12345678",
+      "id": 2
     }
   ]
 }
