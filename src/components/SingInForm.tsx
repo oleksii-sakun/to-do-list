@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormInput } from "semantic-ui-react";
-import { singInAction } from "../redux/actions/autorizationAction";
+import { singInAction } from "../redux/actions/authorizationAction";
 import { Props } from "./SingUpForm";
 
 export interface SelectData {
@@ -20,13 +20,11 @@ export default function SingInForm(props: Props): JSX.Element {
   useEffect(() => {
     if (isSinged) {
       props.history.push("/board");
-      console.log("redir");
     }
   }, [isSinged]);
 
   async function checkUserPassword() {
     dispatch(singInAction(userLogin, userPassword));
-    console.log("test");
   }
 
   const handleLoginChange = (

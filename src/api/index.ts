@@ -91,7 +91,6 @@ export async function singInRequest(
 
 export async function loginCheckRequest(login: string): Promise<boolean> {
   const userData = await axios.get(urljoin(baseUrl, `users?login=${login}`));
-  console.log("userData", userData);
 
   return !userData.data[0];
 }

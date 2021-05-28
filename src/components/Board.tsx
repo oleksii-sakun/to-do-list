@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import List from "./List";
 import CustomCard from "./CustomCard";
 import "./styles.css";
@@ -8,7 +8,7 @@ import {
   deleteColumnAction,
   deleteTaskAction,
 } from "../redux/actions/boardActions";
-import { Button, Icon, Input, Loader, SemanticCOLORS } from "semantic-ui-react";
+import { Button, Icon, Input, SemanticCOLORS } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { Props } from "./SingUpForm";
 import ModalComponent from "./DeleteModal";
@@ -19,7 +19,7 @@ import {
 import EditTaskModal from "./EditTaskModal";
 import { resetTaskToEditAction } from "../redux/actions/editTaskActions";
 import CreateTaskModal from "./CreateTaskModal";
-import { setAutorizationStatusAction } from "../redux/actions/autorizationAction";
+import { setauthorizationStatusAction } from "../redux/actions/authorizationAction";
 
 export interface Column {
   id: number;
@@ -40,7 +40,6 @@ export default function Board(props: Props): JSX.Element {
   const dispatch = useDispatch();
 
   const [createModalStatus, setCreateModalStatus] = useState(false);
-
   const [addColumnInputStatus, setAddColumnInputStatus] = useState(false);
 
   const appData = useSelector(({ app }: { app: Column[] }) => app);
@@ -94,7 +93,7 @@ export default function Board(props: Props): JSX.Element {
     localStorage.removeItem("login");
     localStorage.removeItem("password");
     localStorage.removeItem("userId");
-    dispatch(setAutorizationStatusAction(false));
+    dispatch(setauthorizationStatusAction(false));
     props.history.push("/singIn");
   };
 

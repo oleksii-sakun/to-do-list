@@ -4,17 +4,18 @@ import { loginCheckRequest, singInRequest, singUpRequest } from "../../api";
 import { handleRequestSuccess } from "./boardActions";
 
 import { ActionTypes } from "../constants";
-interface SetAutorizationStatusAction {
+interface SetauthorizationStatusAction {
   type: string;
   payload: boolean;
 }
 
-export const setAutorizationStatusAction = (
+export const setauthorizationStatusAction = (
   payload: boolean
-): SetAutorizationStatusAction => ({
-  type: ActionTypes.SET_AUTORIZATION_STATUS,
+): SetauthorizationStatusAction => ({
+  type: ActionTypes.SET_AUTHORIZATION_STATUS,
   payload,
 });
+
 export const singUpAction =
   (login: string, password: string) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
@@ -27,7 +28,7 @@ export const singUpAction =
   };
 
 export const singInAction =
-  (login: string, password: string, toggleLoader?: (agr: boolean) => void) =>
+  (login: string, password: string, toggleLoader?: (arg: boolean) => void) =>
   async (dispatch: Dispatch<any>): Promise<void> => {
     try {
       if (toggleLoader) {
@@ -40,7 +41,7 @@ export const singInAction =
         localStorage.setItem("password", password);
         localStorage.setItem("userId", userData.data[0].id.toString());
         handleRequestSuccess(dispatch);
-        dispatch(setAutorizationStatusAction(true));
+        dispatch(setauthorizationStatusAction(true));
         if (toggleLoader) {
           toggleLoader(false);
         }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Button, Form, FormInput } from "semantic-ui-react";
 import { loginCheckRequest } from "../api";
-import { singUpAction } from "../redux/actions/autorizationAction";
+import { singUpAction } from "../redux/actions/authorizationAction";
 import { SelectData } from "./SingInForm";
 
 export interface Props {
@@ -41,7 +41,6 @@ export default function SingUpForm(props: Props): JSX.Element {
     data: SelectData
   ) {
     const isLoginValid = await loginCheckRequest(data.value);
-    console.log(isLoginValid);
 
     if (isLoginValid) {
       setInputColor(false);

@@ -16,11 +16,6 @@ interface EditTaskModalInterface {
   columns: Column[];
 }
 
-interface HandlerFunctionInterface {
-  event: React.SyntheticEvent<HTMLElement, Event>;
-  data: { value?: any };
-}
-
 export default function EditTaskModal(
   props: EditTaskModalInterface
 ): JSX.Element {

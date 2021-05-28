@@ -7,7 +7,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import SingInForm from "./components/SingInForm";
 import SingUpForm, { Props } from "./components/SingUpForm";
 import { Loader } from "semantic-ui-react";
-import { singInAction } from "./redux/actions/autorizationAction";
+import { singInAction } from "./redux/actions/authorizationAction";
 import { useDispatch, useSelector } from "react-redux";
 
 function App(props: Props): JSX.Element {
